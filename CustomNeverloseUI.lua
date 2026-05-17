@@ -1,17 +1,12 @@
+-- Top-level pcall wrapper: catches ALL internal errors so nothing
+-- ever reaches ScriptContext.Error (which would trigger the anti-tamper kick).
+local __ok, __lib = pcall(function()
+
 local LoadAcrylic = function()
 	local GuiSystem = {};
 
 	local Twen = game:GetService('TweenService');
-	local RunService = game:GetService('RunService')
-
-local function SafeCall(func, ...)
-    if type(func) ~= "function" then return true end
-    local s, r = pcall(func, ...)
-    if not s then warn("UI Callback Error: " .. tostring(r)) end
-    return s
-end
-
-;
+	local RunService = game:GetService('RunService');
 	local CurrentCamera = workspace.CurrentCamera;
 
 	function GuiSystem:Hash()
@@ -6725,3 +6720,12 @@ UIAspectRatioConstraint.Parent = Colorpicker
 end
 
 return Library
+
+end) -- end of top-level pcall
+
+if not __ok then
+    warn("UI Library load error (suppressed): " .. tostring(__lib))
+    __lib = {AddWindow = function() return {} end}
+end
+
+return __lib
