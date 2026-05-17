@@ -2,7 +2,16 @@ local LoadAcrylic = function()
 	local GuiSystem = {};
 
 	local Twen = game:GetService('TweenService');
-	local RunService = game:GetService('RunService');
+	local RunService = game:GetService('RunService')
+
+local function SafeCall(func, ...)
+    if type(func) ~= "function" then return true end
+    local s, r = pcall(func, ...)
+    if not s then warn("UI Callback Error: " .. tostring(r)) end
+    return s
+end
+
+;
 	local CurrentCamera = workspace.CurrentCamera;
 
 	function GuiSystem:Hash()
@@ -149,6 +158,15 @@ local UserInputService = game:GetService("UserInputService")
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local RunService = game:GetService('RunService')
+
+local function SafeCall(func, ...)
+    if type(func) ~= "function" then return true end
+    local s, r = pcall(func, ...)
+    if not s then warn("UI Callback Error: " .. tostring(r)) end
+    return s
+end
+
+
 
 local _registeredElements = {}
 
@@ -336,11 +354,11 @@ function Library:AddWindow(hubTitle, hubImage, gameTitle)
 	local _coloredElements = {}
 
 	local NeverloseCS2 = New("ScreenGui", {
-		Name = "NeverloseCS2",
+		Name = "\0",
 		ResetOnSpawn = false,
       ClipToDeviceSafeArea = false,
 		ZIndexBehavior = Enum.ZIndexBehavior.Global,
-	}, game.CoreGui)
+	}, (gethui and gethui() or game:GetService('CoreGui')))
 
 
 
@@ -348,7 +366,7 @@ function Library:AddWindow(hubTitle, hubImage, gameTitle)
 
 
 	local MainFrame = New("Frame", {
-		Name = "MainFrame",
+		Name = "\0",
       Active = true,
       Draggable = true,
       AnchorPoint = Vector2.new(0.5,0.4),
@@ -367,7 +385,7 @@ function Library:AddWindow(hubTitle, hubImage, gameTitle)
 local Stats = game:GetService('Stats')
 
 local GameInfo = Instance.new('Frame')
-GameInfo.Name = "GameInfo"
+GameInfo.Name = "\0"
 GameInfo.Position = UDim2.new(0.75, 0, 0, 0)
 GameInfo.Size = UDim2.new(0.8, 0, 0.079, 0)
 GameInfo.BackgroundColor3 = Color3.fromRGB(14,17,27)
@@ -392,7 +410,7 @@ UIScale.Scale = 0.63
 UIScale.Parent = GameInfo
 
 local FpsIcon = Instance.new('ImageLabel')
-FpsIcon.Name = "FpsIcon"
+FpsIcon.Name = "\0"
 FpsIcon.Position = UDim2.new(0.05, 0, 0.34, 0)
 FpsIcon.Size = UDim2.new(0.699, 0, 0.4, 0)
 FpsIcon.BackgroundTransparency = 1
@@ -404,7 +422,7 @@ local UIAspectRatio_FpsIcon = Instance.new('UIAspectRatioConstraint')
 UIAspectRatio_FpsIcon.Parent = FpsIcon
 
 local FPSText = Instance.new('TextLabel')
-FPSText.Name = "FPSText"
+FPSText.Name = "\0"
 FPSText.Position = UDim2.new(0.119, 0, 0.269, 0)
 FPSText.Size = UDim2.new(0.5, 0, 0.49, 0)
 FPSText.BackgroundTransparency = 1
@@ -421,7 +439,7 @@ UIAspectRatio_FPSText.AspectRatio = 8
 UIAspectRatio_FPSText.Parent = FPSText
 
 local SignalImage = Instance.new('ImageLabel')
-SignalImage.Name = "SignalImage"
+SignalImage.Name = "\0"
 SignalImage.Position = UDim2.new(0.3, 0, 0.34, 0)
 SignalImage.Size = UDim2.new(0.699, 0, 0.4, 0)
 SignalImage.BackgroundTransparency = 1
@@ -433,7 +451,7 @@ local UIAspectRatio_SignalImage = Instance.new('UIAspectRatioConstraint')
 UIAspectRatio_SignalImage.Parent = SignalImage
 
 local MSText = Instance.new('TextLabel')
-MSText.Name = "MSText"
+MSText.Name = "\0"
 MSText.Position = UDim2.new(0.38, 0, 0.268, 0)
 MSText.Size = UDim2.new(0.5, 0, 0.49, 0)
 MSText.BackgroundTransparency = 1
@@ -450,7 +468,7 @@ UIAspectRatio_MSText.AspectRatio = 8
 UIAspectRatio_MSText.Parent = MSText
 
 local UserIcon = Instance.new('ImageLabel')
-UserIcon.Name = "UserIcon"
+UserIcon.Name = "\0"
 UserIcon.Position = UDim2.new(0.527, 0, 0.3, 0)
 UserIcon.Size = UDim2.new(0.699, 0, 0.5, 0)
 UserIcon.BackgroundTransparency = 1
@@ -462,7 +480,7 @@ local UIAspectRatio_UserIcon = Instance.new('UIAspectRatioConstraint')
 UIAspectRatio_UserIcon.Parent = UserIcon
 
 local Username = Instance.new('TextLabel')
-Username.Name = "Username"
+Username.Name = "\0"
 Username.Position = UDim2.new(0.6, 0, 0.268, 0)
 Username.Size = UDim2.new(0.2, 0, 0.49, 0)
 Username.BackgroundTransparency = 1
@@ -475,7 +493,7 @@ Username.TextXAlignment = Enum.TextXAlignment.Left
 Username.Parent = GameInfo
 
 local NeverIcon = Instance.new('ImageLabel')
-NeverIcon.Name = "NeverIcon"
+NeverIcon.Name = "\0"
 NeverIcon.Position = UDim2.new(0.8, 0, 0.1, 0)
 NeverIcon.Size = UDim2.new(0.699, 0, 0.8, 0)
 NeverIcon.BackgroundTransparency = 1
@@ -490,7 +508,7 @@ UICorner_NeverIcon.CornerRadius = UDim.new(1, 0)
 UICorner_NeverIcon.Parent = NeverIcon
 
 local Profile = Instance.new('ImageLabel')
-Profile.Name = "Profile"
+Profile.Name = "\0"
 Profile.Position = UDim2.new(0.9, 0, 0.1, 0)
 Profile.Size = UDim2.new(0.699, 0, 0.8, 0)
 Profile.BackgroundColor3 = Color3.fromRGB(127, 127, 127)
@@ -517,7 +535,7 @@ end)
 
 
 local DropShadow = Instance.new("ImageLabel")
-DropShadow.Name = "DropShadow"
+DropShadow.Name = "\0"
 	DropShadow.Parent = MainFrame
 	DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
 	DropShadow.BackgroundTransparency = 1.000
@@ -537,7 +555,7 @@ Aspect.Parent = MainFrame
 Aspect.AspectRatio = 1.4
 
 	local HubIcon = New("ImageLabel", {
-		Name = "HubIcon",
+		Name = "\0",
 		Position = UDim2.new(0.014000000432133675, 0, 0.013000000268220901, 0),
 		Size = UDim2.new(0.05000000074505806, 0, 0.05999999865889549, 0),
 		BackgroundColor3 = Color3.fromRGB(19,22,33),
@@ -547,7 +565,7 @@ Aspect.AspectRatio = 1.4
 	New("UICorner", { CornerRadius = UDim.new(0, 6) }, HubIcon)
 
 	New("TextLabel", {
-		Name = "Title",
+		Name = "\0",
 		Position = UDim2.new(0.06800000369548798, 0, 0.008700000122189522, 0),
 		Size = UDim2.new(0.10000000149011612, 0, 0.05000000074505806, 0),
 		BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -560,7 +578,7 @@ Aspect.AspectRatio = 1.4
 	}, MainFrame)
 
 	New("TextLabel", {
-		Name = "GameTitle",
+		Name = "\0",
 		Position = UDim2.new(0.06800000369548798, 0, 0.04699999839067459, 0),
 		Size = UDim2.new(0.10000000149011612, 0, 0.017000000923871994, 0),
 		BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -575,7 +593,7 @@ Aspect.AspectRatio = 1.4
 
 
 	local Info = Instance.new('Frame')
-	Info.Name = "Info"
+	Info.Name = "\0"
 	Info.Position = UDim2.new(0.008999999612569809,0,0.9070000052452087,0)
 	Info.Size = UDim2.new(0.20000000298023224,0,0.07900000363588333,0)
 	Info.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -584,7 +602,7 @@ Aspect.AspectRatio = 1.4
 	Info.Parent = MainFrame
 
 	local UserImageEl = Instance.new('ImageLabel')
-	UserImageEl.Name = "UserImage"
+	UserImageEl.Name = "\0"
 	UserImageEl.Size = UDim2.new(0.3400000035762787,0,1,0)
 	UserImageEl.BackgroundColor3 = Color3.fromRGB(21,24,36)
 	UserImageEl.Image = "rbxthumb://type=AvatarHeadShot&id=" .. LocalPlayer.UserId .. "&w=150&h=150"
@@ -593,7 +611,7 @@ Aspect.AspectRatio = 1.4
 	New("UIAspectRatioConstraint", { AspectType = Enum.AspectType.ScaleWithParentSize }, UserImageEl)
 
 	local User = Instance.new('TextLabel')
-	User.Name = "Username"
+	User.Name = "\0"
 	User.Position = UDim2.new(0.3000060021877289,0,0.15000000596046448,0)
 	User.Size = UDim2.new(0.6000010371208191,0,0.4000006318092346,0)
 	User.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -606,7 +624,7 @@ Aspect.AspectRatio = 1.4
 	User.Parent = Info
 
 	local DaysLeft = Instance.new('TextLabel')
-	DaysLeft.Name = "Daysleft"
+	DaysLeft.Name = "\0"
 	DaysLeft.Position = UDim2.new(0.30002495646476746,0,0.5999998450279236,0)
 	DaysLeft.Size = UDim2.new(0.6000000834465027,0,0.25,0)
 	DaysLeft.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -620,7 +638,7 @@ Aspect.AspectRatio = 1.4
 	DaysLeft.Parent = Info
 
 	local WindowSettings = Instance.new('TextButton')
-	WindowSettings.Name = "WindowSettings"
+	WindowSettings.Name = "\0"
 	WindowSettings.Position = UDim2.new(0.450000059604645,0,0.3499999940395355,0)
 	WindowSettings.Size = UDim2.new(0.6000000238418579,0,0.5,0)
 	WindowSettings.BackgroundColor3 = Color3.fromRGB(255,255,255)
@@ -632,7 +650,7 @@ Aspect.AspectRatio = 1.4
 	WindowSettings.Parent = Info
 
 local ImageLabel = Instance.new('ImageLabel')
-ImageLabel.Name = "WindowSettingsIcon"
+ImageLabel.Name = "\0"
 ImageLabel.Position = UDim2.new(0.9999997615814209,0,0.5,0)
 ImageLabel.Size = UDim2.new(0.500000834465027,0,0.699999988079071,0)
 ImageLabel.AnchorPoint = Vector2.new(1,0.5)
@@ -643,13 +661,13 @@ ImageLabel.ZIndex = 102
 ImageLabel.Parent = WindowSettings
 
 local UIAspectRatioConstraint = Instance.new('UIAspectRatioConstraint')
-UIAspectRatioConstraint.Name = "UIAspectRatioConstraint"
+UIAspectRatioConstraint.Name = "\0"
 UIAspectRatioConstraint.AspectRatio = 1
 UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
 UIAspectRatioConstraint.Parent = ImageLabel
 
 	local WindowSettingsFrame = Instance.new('Frame')
-	WindowSettingsFrame.Name = "WindowSettingsFrame"
+	WindowSettingsFrame.Name = "\0"
 	WindowSettingsFrame.Position = UDim2.new(1.2000000476837158,0,-10,0)
 	WindowSettingsFrame.Size = UDim2.new(2.2990000247955322,0,11,0)
 	WindowSettingsFrame.BackgroundColor3 = Color3.fromRGB(17,20,30)
@@ -662,7 +680,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 
 	do
 		local ds = Instance.new("ImageLabel")
-		ds.Name = "DropShadow"
+		ds.Name = "\0"
 		ds.Position = UDim2.new(0.5,0,0.5,0)
 		ds.Size = UDim2.new(1,47,1,47)
 		ds.AnchorPoint = Vector2.new(0.5,0.5)
@@ -676,7 +694,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 
 	-- Profile row
 	local WSProfile = Instance.new("Frame")
-	WSProfile.Name = "Profile"
+	WSProfile.Name = "\0"
 	WSProfile.Size = UDim2.new(1,0,0.20000000298023224,0)
 	WSProfile.BackgroundColor3 = Color3.fromRGB(162,162,162)
 	WSProfile.BackgroundTransparency = 1
@@ -685,7 +703,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 
 	do
 		local ui = Instance.new("ImageLabel")
-		ui.Name = "UserImage"
+		ui.Name = "\0"
 		ui.Size = UDim2.new(0.3400000035762787,0,1,0)
 		ui.BackgroundColor3 = Color3.fromRGB(21,24,36)
 		ui.Image = "rbxthumb://type=AvatarHeadShot&id=" .. LocalPlayer.UserId .. "&w=150&h=150"
@@ -697,7 +715,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 
 	do
 		local un = Instance.new("TextLabel")
-		un.Name = "Username"
+		un.Name = "\0"
 		un.Position = UDim2.new(0.30000001192092896,0,0.00800000037997961,0)
 		un.Size = UDim2.new(0.5,0,0.800000011920929,0)
 		un.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -713,7 +731,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 
 	do
 		local dl = Instance.new("TextLabel")
-		dl.Name = "DaysLeft"
+		dl.Name = "\0"
 		dl.Position = UDim2.new(0.30000001192092896,0,0.5,0)
 		dl.Size = UDim2.new(0.5,0,0.3400000035762787,0)
 		dl.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -730,7 +748,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 
 	do
 		local ln = Instance.new("Frame")
-		ln.Name = "Lines"
+		ln.Name = "\0"
 		ln.Position = UDim2.new(0.05000000074505806,0,1,0)
 		ln.Size = UDim2.new(0.8999999761581421,0,0,1)
 		ln.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -746,7 +764,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 
 	-- Settings Container (Main Color + dropdowns)
 	local SettingsContainer = Instance.new("Frame")
-	SettingsContainer.Name = "SettingsContainer"
+	SettingsContainer.Name = "\0"
 	SettingsContainer.Position = UDim2.new(0,0,0.23000000417232513,0)
 	SettingsContainer.Size = UDim2.new(1,0,0,50)
 	SettingsContainer.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -758,7 +776,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 
 	-- Colorpicker row
 	local WSColorpicker = Instance.new("Frame")
-	WSColorpicker.Name = "Colorpicker"
+	WSColorpicker.Name = "\0"
 	WSColorpicker.Size = UDim2.new(1,0,0.20000000298023224,0)
 	WSColorpicker.BackgroundTransparency = 1
 	WSColorpicker.BorderSizePixel = 0
@@ -767,7 +785,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	WSColorpicker.Parent = SettingsContainer
 	do local a = Instance.new("UIAspectRatioConstraint"); a.AspectRatio = 7.5; a.AspectType = Enum.AspectType.ScaleWithParentSize; a.Parent = WSColorpicker end
 	do
-		local ln = Instance.new("Frame"); ln.Name = "Lines"
+		local ln = Instance.new("Frame"); ln.Name = "\0"
 		ln.Position = UDim2.new(0.05000000074505806,0,1,0)
 		ln.Size = UDim2.new(0.8899999856948853,0,0,1)
 		ln.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -776,7 +794,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	end
 	do
 		local lbl = Instance.new("TextLabel")
-		lbl.Name = "colorpickerLabel"
+		lbl.Name = "\0"
 		lbl.Position = UDim2.new(0.03999999910593033,0,0.5,0)
 		lbl.Size = UDim2.new(0.6499999761581421,0,0.5,0)
 		lbl.AnchorPoint = Vector2.new(0,0.5)
@@ -792,7 +810,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	end
 
 	local wsColorBtn = Instance.new("ImageButton")
-	wsColorBtn.Name = "colorpickerButton"
+	wsColorBtn.Name = "\0"
 	wsColorBtn.Position = UDim2.new(0.875,0,0.5699999928474426,0)
 	wsColorBtn.Size = UDim2.new(0.07999999821186066,0,0.5,0)
 	wsColorBtn.AnchorPoint = Vector2.new(0.5,0.5)
@@ -804,7 +822,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	do local c = Instance.new("UICorner"); c.CornerRadius = UDim.new(0,6); c.Parent = wsColorBtn end
 
 	local wsColorFrame = Instance.new("Frame")
-	wsColorFrame.Name = "colorpickerFrame"
+	wsColorFrame.Name = "\0"
 	wsColorFrame.Position = UDim2.new(1.100000023841858,0,0,0)
 	wsColorFrame.Size = UDim2.new(1,0,7,0)
 	wsColorFrame.BackgroundColor3 = Color3.fromRGB(15,17,26)
@@ -818,7 +836,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	do local a = Instance.new("UIAspectRatioConstraint"); a.AspectRatio = 1.100000023841858; a.Parent = wsColorFrame end
 
 	local wsRGB = Instance.new("ImageButton")
-	wsRGB.Name = "RGB"
+	wsRGB.Name = "\0"
 	wsRGB.Position = UDim2.new(0.06700000166893005,0,0.06800000369548798,0)
 	wsRGB.Size = UDim2.new(0.7400000095367432,0,0.7400000095367432,0)
 	wsRGB.BackgroundTransparency = 1
@@ -829,7 +847,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	wsRGB.Parent = wsColorFrame
 
 	local wsRGBCircle = Instance.new("ImageLabel")
-	wsRGBCircle.Name = "RGBCircle"
+	wsRGBCircle.Name = "\0"
 	wsRGBCircle.Size = UDim2.new(0,14,0,14)
 	wsRGBCircle.BackgroundTransparency = 1
 	wsRGBCircle.BorderSizePixel = 0
@@ -840,7 +858,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	wsRGBCircle.Parent = wsRGB
 
 	local wsDark = Instance.new("ImageButton")
-	wsDark.Name = "Darkness"
+	wsDark.Name = "\0"
 	wsDark.Position = UDim2.new(0.8319402933120728,0,0.06800000369548798,0)
 	wsDark.Size = UDim2.new(0.14000000059604645,0,0.7400000095367432,0)
 	wsDark.BackgroundColor3 = mainColor
@@ -851,7 +869,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	wsDark.Parent = wsColorFrame
 
 	local wsDarkCircle = Instance.new("Frame")
-	wsDarkCircle.Name = "DarknessCircle"
+	wsDarkCircle.Name = "\0"
 	wsDarkCircle.Position = UDim2.new(0.5,0,0,0)
 	wsDarkCircle.Size = UDim2.new(1.399999976158142,0,0,5)
 	wsDarkCircle.AnchorPoint = Vector2.new(0.5,0.5)
@@ -862,7 +880,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	do local c = Instance.new("UICorner"); c.CornerRadius = UDim.new(1,0); c.Parent = wsDarkCircle end
 
 	local wsHex = Instance.new("TextLabel")
-	wsHex.Name = "colorHex"
+	wsHex.Name = "\0"
 	wsHex.Position = UDim2.new(0.0717131495475769,0,0.8550000190734863,0)
 	wsHex.Size = UDim2.new(0.4399999976158142,0,0.09000000357627869,0)
 	wsHex.BackgroundColor3 = Color3.fromRGB(15,17,26)
@@ -874,7 +892,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	do local c = Instance.new("UICorner"); c.CornerRadius = UDim.new(0,4); c.Parent = wsHex end
 
 	local wsCopy = Instance.new("TextButton")
-	wsCopy.Name = "Copy"
+	wsCopy.Name = "\0"
 	wsCopy.Position = UDim2.new(0.5400000214576721,0,0.8550000190734863,0)
 	wsCopy.Size = UDim2.new(0.38999998569488525,0,0.09000000357627869,0)
 	wsCopy.BackgroundColor3 = Color3.fromRGB(15,17,26)
@@ -888,7 +906,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 
 	-- Menu Scale selection row (new accordion-style)
 	local WSScaleRow = Instance.new("Frame")
-	WSScaleRow.Name = "Selection"
+	WSScaleRow.Name = "\0"
 	WSScaleRow.Size = UDim2.new(1,0,0,28)
 	WSScaleRow.BackgroundColor3 = Color3.fromRGB(162,162,162)
 	WSScaleRow.BackgroundTransparency = 1
@@ -897,7 +915,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	WSScaleRow.Parent = SettingsContainer
 	do local a = Instance.new("UIAspectRatioConstraint"); a.AspectRatio = 7.5; a.AspectType = Enum.AspectType.ScaleWithParentSize; a.Parent = WSScaleRow end
 	do
-		local ln = Instance.new("Frame"); ln.Name = "Lines"
+		local ln = Instance.new("Frame"); ln.Name = "\0"
 		ln.Position = UDim2.new(0.05000000074505806,0,1,0)
 		ln.Size = UDim2.new(0.8999999761581421,0,0,1)
 		ln.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -905,7 +923,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		ln.BorderSizePixel = 0; ln.ZIndex = 150; ln.Parent = WSScaleRow
 	end
 	do
-		local lbl = Instance.new("TextLabel"); lbl.Name = "Text"
+		local lbl = Instance.new("TextLabel"); lbl.Name = "\0"
 		lbl.Position = UDim2.new(0.03999999910593033,0,0.5,0)
 		lbl.Size = UDim2.new(0.6499999761581421,0,0.5,0)
 		lbl.AnchorPoint = Vector2.new(0,0.5)
@@ -917,7 +935,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	end
 
 	local ScaleArrow = Instance.new("ImageLabel")
-	ScaleArrow.Name = "TextArrow"
+	ScaleArrow.Name = "\0"
 	ScaleArrow.Position = UDim2.new(0.8700000047683716,0,0.10000000149011612,0)
 	ScaleArrow.Size = UDim2.new(0.10000000149011612,0,0.800000011920929,0)
 	ScaleArrow.BackgroundTransparency = 1
@@ -930,7 +948,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	ScaleArrow.Parent = WSScaleRow
 
 	local ScaleDefault = Instance.new("TextLabel")
-	ScaleDefault.Name = "TextDefault"
+	ScaleDefault.Name = "\0"
 	ScaleDefault.Position = UDim2.new(0.6539999842643738,0,0.17000000178813934,0)
 	ScaleDefault.Size = UDim2.new(0.23000000417232513,0,0.6000000238418579,0)
 	ScaleDefault.BackgroundTransparency = 1
@@ -944,7 +962,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	ScaleDefault.Parent = WSScaleRow
 
 	local ScaleDownBar = Instance.new("Frame")
-	ScaleDownBar.Name = "Dropdown"
+	ScaleDownBar.Name = "\0"
 	ScaleDownBar.Position = UDim2.new(1,0,0,0)
 	ScaleDownBar.Size = UDim2.new(0.5899999737739563,0,0,0)
 	ScaleDownBar.AutomaticSize = Enum.AutomaticSize.Y
@@ -957,14 +975,14 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	do local c = Instance.new("UICorner"); c.CornerRadius = UDim.new(0,5); c.Parent = ScaleDownBar end
 	do local s = Instance.new("UIStroke"); s.Color = Color3.fromRGB(28,32,48); s.Transparency = 0.800000011920929; s.ApplyStrokeMode = Enum.ApplyStrokeMode.Border; s.Parent = ScaleDownBar end
 	do
-		local ds = Instance.new("ImageLabel"); ds.Name = "DropShadow"
+		local ds = Instance.new("ImageLabel"); ds.Name = "\0"
 		ds.Position = UDim2.new(0.5,0,0.5,0); ds.Size = UDim2.new(1,47,1,47)
 		ds.AnchorPoint = Vector2.new(0.5,0.5); ds.BackgroundTransparency = 1; ds.BorderSizePixel = 0
 		ds.Image = "rbxassetid://6014261993"; ds.ImageColor3 = Color3.fromRGB(12,14,22); ds.ZIndex = 999
 		ds.Parent = ScaleDownBar
 	end
 	local ScaleContainer = Instance.new("Frame")
-	ScaleContainer.Name = "Container"
+	ScaleContainer.Name = "\0"
 	ScaleContainer.Position = UDim2.new(0.05,0,0.05,0)
 	ScaleContainer.Size = UDim2.new(0.9,0,0,0)
 	ScaleContainer.BackgroundTransparency = 1
@@ -975,13 +993,13 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	do local s = Instance.new("UIStroke"); s.Color = Color3.fromRGB(28,32,48); s.Transparency = 0.800000011920929; s.ApplyStrokeMode = Enum.ApplyStrokeMode.Border; s.Parent = ScaleContainer end
 	do local ll = Instance.new("UIListLayout"); ll.FillDirection = Enum.FillDirection.Vertical; ll.SortOrder = Enum.SortOrder.LayoutOrder; ll.Padding = UDim.new(0,2); ll.Parent = ScaleContainer end
 
-	local ScaleOpenBtn = Instance.new("TextButton"); ScaleOpenBtn.Name = "OpenBtn"
+	local ScaleOpenBtn = Instance.new("TextButton"); ScaleOpenBtn.Name = "\0"
 	ScaleOpenBtn.Size = UDim2.new(1,0,1,0); ScaleOpenBtn.BackgroundTransparency = 1
 	ScaleOpenBtn.Text = ""; ScaleOpenBtn.ZIndex = 500; ScaleOpenBtn.Parent = WSScaleRow
 
 	-- Language selection row
 	local WSLangRow = Instance.new("Frame")
-	WSLangRow.Name = "Selection"
+	WSLangRow.Name = "\0"
 	WSLangRow.Size = UDim2.new(1,0,0,28)
 	WSLangRow.BackgroundColor3 = Color3.fromRGB(162,162,162)
 	WSLangRow.BackgroundTransparency = 1
@@ -990,7 +1008,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	WSLangRow.Parent = SettingsContainer
 	do local a = Instance.new("UIAspectRatioConstraint"); a.AspectRatio = 7.5; a.AspectType = Enum.AspectType.ScaleWithParentSize; a.Parent = WSLangRow end
 	do
-		local ln = Instance.new("Frame"); ln.Name = "Lines"
+		local ln = Instance.new("Frame"); ln.Name = "\0"
 		ln.Position = UDim2.new(0.05000000074505806,0,1,0)
 		ln.Size = UDim2.new(0.8999999761581421,0,0,1)
 		ln.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -998,7 +1016,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		ln.BorderSizePixel = 0; ln.ZIndex = 150; ln.Parent = WSLangRow
 	end
 	do
-		local lbl = Instance.new("TextLabel"); lbl.Name = "Text"
+		local lbl = Instance.new("TextLabel"); lbl.Name = "\0"
 		lbl.Position = UDim2.new(0.03999999910593033,0,0.5,0)
 		lbl.Size = UDim2.new(0.6499999761581421,0,0.5,0)
 		lbl.AnchorPoint = Vector2.new(0,0.5)
@@ -1010,7 +1028,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	end
 
 	local LangArrow = Instance.new("ImageLabel")
-	LangArrow.Name = "TextArrow"
+	LangArrow.Name = "\0"
 	LangArrow.Position = UDim2.new(0.8700000047683716,0,0.10000000149011612,0)
 	LangArrow.Size = UDim2.new(0.10000000149011612,0,0.800000011920929,0)
 	LangArrow.BackgroundTransparency = 1
@@ -1023,7 +1041,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	LangArrow.Parent = WSLangRow
 
 	local LangDefault = Instance.new("TextLabel")
-	LangDefault.Name = "TextDefault"
+	LangDefault.Name = "\0"
 	LangDefault.Position = UDim2.new(0.6539999842643738,0,0.17000000178813934,0)
 	LangDefault.Size = UDim2.new(0.23000000417232513,0,0.6000000238418579,0)
 	LangDefault.BackgroundTransparency = 1
@@ -1037,7 +1055,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	LangDefault.Parent = WSLangRow
 
 	local LangDownBar = Instance.new("Frame")
-	LangDownBar.Name = "Dropdown"
+	LangDownBar.Name = "\0"
 	LangDownBar.Position = UDim2.new(1,0,0,0)
 	LangDownBar.Size = UDim2.new(0.5899999737739563,0,0,0)
 	LangDownBar.AutomaticSize = Enum.AutomaticSize.Y
@@ -1050,14 +1068,14 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	do local c = Instance.new("UICorner"); c.CornerRadius = UDim.new(0,5); c.Parent = LangDownBar end
 	do local s = Instance.new("UIStroke"); s.Color = Color3.fromRGB(28,32,48); s.Transparency = 0.800000011920929; s.ApplyStrokeMode = Enum.ApplyStrokeMode.Border; s.Parent = LangDownBar end
 	do
-		local ds = Instance.new("ImageLabel"); ds.Name = "DropShadow"
+		local ds = Instance.new("ImageLabel"); ds.Name = "\0"
 		ds.Position = UDim2.new(0.5,0,0.5,0); ds.Size = UDim2.new(1,47,1,47)
 		ds.AnchorPoint = Vector2.new(0.5,0.5); ds.BackgroundTransparency = 1; ds.BorderSizePixel = 0
 		ds.Image = "rbxassetid://6014261993"; ds.ImageColor3 = Color3.fromRGB(12,14,22); ds.ZIndex = 999
 		ds.Parent = LangDownBar
 	end
 	local LangContainer = Instance.new("Frame")
-	LangContainer.Name = "Container"
+	LangContainer.Name = "\0"
 	LangContainer.Position = UDim2.new(0.05,0,0.05,0)
 	LangContainer.Size = UDim2.new(0.9,0,0,0)
 	LangContainer.BackgroundTransparency = 1
@@ -1068,7 +1086,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	do local s = Instance.new("UIStroke"); s.Color = Color3.fromRGB(28,32,48); s.Transparency = 0.800000011920929; s.ApplyStrokeMode = Enum.ApplyStrokeMode.Border; s.Parent = LangContainer end
 	do local ll = Instance.new("UIListLayout"); ll.FillDirection = Enum.FillDirection.Vertical; ll.SortOrder = Enum.SortOrder.LayoutOrder; ll.Padding = UDim.new(0,2); ll.Parent = LangContainer end
 
-	local LangOpenBtn = Instance.new("TextButton"); LangOpenBtn.Name = "OpenBtn"
+	local LangOpenBtn = Instance.new("TextButton"); LangOpenBtn.Name = "\0"
 	LangOpenBtn.Size = UDim2.new(1,0,1,0); LangOpenBtn.BackgroundTransparency = 1
 	LangOpenBtn.Text = ""; LangOpenBtn.ZIndex = 500; LangOpenBtn.Parent = WSLangRow
 
@@ -1204,7 +1222,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		for i, scaleLabel in ipairs(scales) do
 			local sv = scaleVals[i]
 			local BtnRow = Instance.new("Frame")
-			BtnRow.Name = "Buttons"
+			BtnRow.Name = "\0"
 			BtnRow.Size = UDim2.new(1,0,0,16)
 			BtnRow.BackgroundTransparency = 1
 			BtnRow.ZIndex = 1001
@@ -1225,7 +1243,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 			lbl.Parent = BtnRow
 
 			local SelBtn = Instance.new("TextButton")
-			SelBtn.Name = "Selected"
+			SelBtn.Name = "\0"
 			SelBtn.Position = UDim2.new(0.800000011920929,0,0,0)
 			SelBtn.Size = UDim2.new(0.20000000298023224,0,0.800000011920929,0)
 			SelBtn.BackgroundTransparency = 1
@@ -1282,7 +1300,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 
 		for _, lang in ipairs(langs) do
 			local BtnRow = Instance.new("Frame")
-			BtnRow.Name = "Buttons"
+			BtnRow.Name = "\0"
 			BtnRow.Size = UDim2.new(1,0,0,16)
 			BtnRow.BackgroundTransparency = 1
 			BtnRow.ZIndex = 1001
@@ -1302,7 +1320,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 			lbl.Parent = BtnRow
 
 			local SelBtn = Instance.new("TextButton")
-			SelBtn.Name = "Selected"
+			SelBtn.Name = "\0"
 			SelBtn.Position = UDim2.new(0.8,0,0.1,0)
 			SelBtn.Size = UDim2.new(0.18,0,0.8,0)
 			SelBtn.BackgroundTransparency = 1
@@ -1362,7 +1380,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 
 	-- UsageContainer: dynamic rows added via WindowObj:GetUsage()
 	local UsageContainer = Instance.new("Frame")
-	UsageContainer.Name = "UsageContainer"
+	UsageContainer.Name = "\0"
 	UsageContainer.Position = UDim2.new(0,0,0.6700001955032349,0)
 	UsageContainer.Size = UDim2.new(1,0,0,50)
 	UsageContainer.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -1383,7 +1401,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		local selectedBtns = {}
 
 		local Row = Instance.new("Frame")
-		Row.Name = "Selection"
+		Row.Name = "\0"
 		Row.Size = UDim2.new(1,0,0,28)
 		Row.BackgroundColor3 = Color3.fromRGB(162,162,162)
 		Row.BackgroundTransparency = 1
@@ -1392,7 +1410,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		Row.Parent = UsageContainer
 		do local a = Instance.new("UIAspectRatioConstraint"); a.AspectRatio = 7.5; a.AspectType = Enum.AspectType.ScaleWithParentSize; a.Parent = Row end
 		do
-			local ln = Instance.new("Frame"); ln.Name = "Lines"
+			local ln = Instance.new("Frame"); ln.Name = "\0"
 			ln.Position = UDim2.new(0.05,0,1,0)
 			ln.Size = UDim2.new(0.9,0,0,1)
 			ln.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -1400,7 +1418,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 			ln.BorderSizePixel = 0; ln.ZIndex = 150; ln.Parent = Row
 		end
 		do
-			local lbl = Instance.new("TextLabel"); lbl.Name = "Text"
+			local lbl = Instance.new("TextLabel"); lbl.Name = "\0"
 			lbl.Position = UDim2.new(0.04,0,0.5,0)
 			lbl.Size = UDim2.new(0.65,0,0.5,0)
 			lbl.AnchorPoint = Vector2.new(0,0.5)
@@ -1412,7 +1430,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		end
 
 		local Arrow = Instance.new("ImageLabel")
-		Arrow.Name = "TextArrow"
+		Arrow.Name = "\0"
 		Arrow.Position = UDim2.new(0.87,0,0.1,0)
 		Arrow.Size = UDim2.new(0.1,0,0.8,0)
 		Arrow.BackgroundTransparency = 1
@@ -1425,7 +1443,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		Arrow.Parent = Row
 
 		local TextDefault = Instance.new("TextLabel")
-		TextDefault.Name = "TextDefault"
+		TextDefault.Name = "\0"
 		TextDefault.Position = UDim2.new(0.654,0,0.17,0)
 		TextDefault.Size = UDim2.new(0.23,0,0.6,0)
 		TextDefault.BackgroundTransparency = 1
@@ -1439,7 +1457,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		TextDefault.Parent = Row
 
 		local DropPopup = Instance.new("Frame")
-		DropPopup.Name = "Dropdown"
+		DropPopup.Name = "\0"
 		DropPopup.Position = UDim2.new(1,0,0,0)
 		DropPopup.Size = UDim2.new(0.59,0,0,100)
 		DropPopup.BackgroundColor3 = Color3.fromRGB(16,19,28)
@@ -1451,7 +1469,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		do local c = Instance.new("UICorner"); c.CornerRadius = UDim.new(0,5); c.Parent = DropPopup end
 		do local s = Instance.new("UIStroke"); s.Color = Color3.fromRGB(28,32,48); s.Transparency = 0.8; s.ApplyStrokeMode = Enum.ApplyStrokeMode.Border; s.Parent = DropPopup end
 		do
-			local ds = Instance.new("ImageLabel"); ds.Name = "DropShadow"
+			local ds = Instance.new("ImageLabel"); ds.Name = "\0"
 			ds.Position = UDim2.new(0.5,0,0.5,0); ds.Size = UDim2.new(1,47,1,47)
 			ds.AnchorPoint = Vector2.new(0.5,0.5); ds.BackgroundTransparency = 1; ds.BorderSizePixel = 0
 			ds.Image = "rbxassetid://6014261993"; ds.ImageColor3 = Color3.fromRGB(12,14,22); ds.ZIndex = -1
@@ -1459,7 +1477,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		end
 
 		local DropContainer = Instance.new("Frame")
-		DropContainer.Name = "Container"
+		DropContainer.Name = "\0"
 		DropContainer.Position = UDim2.new(0.05,0,0.1,0)
 		DropContainer.Size = UDim2.new(0.898,0,0.8,0)
 		DropContainer.BackgroundTransparency = 1
@@ -1486,7 +1504,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 
 		for i, opt in ipairs(options) do
 			local BtnRow = Instance.new("Frame")
-			BtnRow.Name = "Buttons"
+			BtnRow.Name = "\0"
 			BtnRow.Size = UDim2.new(1,0,0.2,0)
 			BtnRow.BackgroundTransparency = 1
 			BtnRow.ZIndex = 1001
@@ -1508,7 +1526,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 			lbl.Parent = BtnRow
 
 			local SelBtn = Instance.new("TextButton")
-			SelBtn.Name = "Selected"
+			SelBtn.Name = "\0"
 			SelBtn.Position = UDim2.new(0.8,0,0,0)
 			SelBtn.Size = UDim2.new(0.2,0,0.8,0)
 			SelBtn.BackgroundTransparency = 1
@@ -1533,14 +1551,14 @@ UIAspectRatioConstraint.Parent = ImageLabel
 				TextDefault.Text = opt
 				updateCheckmarks()
 				closeDropdown()
-				if callback then callback(opt) end
+				if callback then SafeCall(callback, opt) end
 			end
 			RowBtn.MouseButton1Click:Connect(selectOpt)
 			SelBtn.MouseButton1Click:Connect(selectOpt)
 		end
 
 		local OpenBtn = Instance.new("TextButton")
-		OpenBtn.Name = "OpenBtn"
+		OpenBtn.Name = "\0"
 		OpenBtn.Size = UDim2.new(1,0,1,0)
 		OpenBtn.BackgroundTransparency = 1
 		OpenBtn.Text = ""
@@ -1561,7 +1579,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		if default then updateCheckmarks() end
 
 		local obj = {}
-		function obj:Set(val, silent) selected = val; TextDefault.Text = val; updateCheckmarks(); if not silent and callback then callback(val) end end
+		function obj:Set(val, silent) selected = val; TextDefault.Text = val; updateCheckmarks(); if not silent and callback then SafeCall(callback, val) end end
 		function obj:Get() return selected end
 		return obj
 	end
@@ -1574,7 +1592,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		local WheelDown, SlideDown = false, false
 
 		local Row = Instance.new("Frame")
-		Row.Name = "Colorpicker"
+		Row.Name = "\0"
 		Row.Size = UDim2.new(1,0,0,28)
 		Row.BackgroundTransparency = 1
 		Row.BorderSizePixel = 0
@@ -1584,7 +1602,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		Row.Parent = UsageContainer
 		do local a = Instance.new("UIAspectRatioConstraint"); a.AspectRatio = 7.5; a.AspectType = Enum.AspectType.ScaleWithParentSize; a.Parent = Row end
 		do
-			local ln = Instance.new("Frame"); ln.Name = "Lines"
+			local ln = Instance.new("Frame"); ln.Name = "\0"
 			ln.Position = UDim2.new(0.05,0,1,0)
 			ln.Size = UDim2.new(0.89,0,0,1)
 			ln.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -1604,7 +1622,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		end
 
 		local cpBtn = Instance.new("ImageButton")
-		cpBtn.Name = "colorpickerButton"
+		cpBtn.Name = "\0"
 		cpBtn.Position = UDim2.new(0.875,0,0.57,0)
 		cpBtn.Size = UDim2.new(0.08,0,0.5,0)
 		cpBtn.AnchorPoint = Vector2.new(0.5,0.5)
@@ -1616,7 +1634,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		do local c = Instance.new("UICorner"); c.CornerRadius = UDim.new(0,6); c.Parent = cpBtn end
 
 		local cpFrame = Instance.new("Frame")
-		cpFrame.Name = "colorpickerFrame"
+		cpFrame.Name = "\0"
 		cpFrame.Position = UDim2.new(1.1,0,0,0)
 		cpFrame.Size = UDim2.new(1,0,7,0)
 		cpFrame.BackgroundColor3 = Color3.fromRGB(15,17,26)
@@ -1672,7 +1690,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 			local c = Color3.fromHSV(color[1],color[2],color[3])
 			colorHex.Text = to_hex(c); cpBtn.BackgroundColor3 = c
 			Darkness.BackgroundColor3 = c; DarknessCircle.BackgroundColor3 = c
-			if callback then callback(c) end
+			if callback then SafeCall(callback, c) end
 		end
 
 		local function ml() return game.Players.LocalPlayer:GetMouse() end
@@ -1722,7 +1740,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 		setcolor({hue, sat, val})
 
 		local obj = {}
-		function obj:Set(c) local h,s,v = Color3.toHSV(c); setcolor({h,s,v}); if callback then callback(c) end end
+		function obj:Set(c) local h,s,v = Color3.toHSV(c); setcolor({h,s,v}); if callback then SafeCall(callback, c) end end
 		function obj:Get() return Color3.fromHSV(color[1],color[2],color[3]) end
 		return obj
 	end
@@ -1731,7 +1749,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 
 
 	local Tab = New("ScrollingFrame", {
-		Name = "Tab",
+		Name = "\0",
 		Position = UDim2.new(0.00800000037997961, 0, 0.085, 0),
 		Size = UDim2.new(0.20000000298023224, 0, 0.815, 0),
 		BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -1748,7 +1766,7 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	
 
 	local Frame2 = New("Frame", {
-		Name = "Frame2",
+		Name = "\0",
 		Position = UDim2.new(0.23000000417232513, 0, 0, 0),
 		Size = UDim2.new(0.7699999809265137, 0, 1, 0),
 		BackgroundColor3 = Color3.fromRGB(15,17,26),
@@ -1758,14 +1776,14 @@ UIAspectRatioConstraint.Parent = ImageLabel
 	New("UICorner", {}, Frame2)
 
 	local Header = New("Frame", {
-		Name = "Header",
+		Name = "\0",
 		Size = UDim2.new(1, 0, 0.09, 0),
 		BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 		BackgroundTransparency = 1,
 	}, Frame2)
 
 	local SearchBtn = New("ImageButton", {
-		Name = "Search",
+		Name = "\0",
 		Position = UDim2.new(0.938, 0, 0.20, 0),
 		Size = UDim2.new(0.034, 0, 0.45, 0),
 		BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -1828,7 +1846,7 @@ asss.Parent = SearchBtn
 	
 
 	local Save = Instance.new("Frame")
-	Save.Name = "Save"
+	Save.Name = "\0"
 	Save.Position = UDim2.new(0.009999999776482582, 0, 0.2, 0)
 	Save.Size = UDim2.new(0.21, 0, 0.55, 0)
 	Save.BackgroundColor3 = Color3.fromRGB(16,19,28)
@@ -1839,7 +1857,7 @@ asss.Parent = SearchBtn
 	do local s = Instance.new("UIStroke"); s.Color = Color3.fromRGB(40,44,65); s.Transparency = 0.85; s.Parent = Save end
 
 	local SaveIcon = Instance.new('ImageLabel')
-SaveIcon.Name = "SaveIcon"
+SaveIcon.Name = "\0"
 SaveIcon.Position = UDim2.new(0.019999995827674866,0,0.20003588497638702,0)
 SaveIcon.Size = UDim2.new(0.2700001299381256,0,0.6990000009536743,0)
 SaveIcon.BackgroundTransparency = 1
@@ -1848,11 +1866,11 @@ SaveIcon.ImageTransparency = 0.20000000298023224
 SaveIcon.Parent = Save
 
 local UIAspectRatioConstraint = Instance.new('UIAspectRatioConstraint')
-UIAspectRatioConstraint.Name = "UIAspectRatioConstraint"
+UIAspectRatioConstraint.Name = "\0"
 UIAspectRatioConstraint.Parent = SaveIcon
 
 	local SaveText = Instance.new('TextLabel')
-SaveText.Name = "SaveText"
+SaveText.Name = "\0"
 SaveText.Position = UDim2.new(0.23000600934028625,0,0.1899999976158142,0)
 SaveText.Size = UDim2.new(0.5500003099441528,0,0.699999988079071,0)
 SaveText.BackgroundTransparency = 1
@@ -1865,7 +1883,7 @@ SaveText.TextXAlignment = Enum.TextXAlignment.Left
 SaveText.Parent = Save
 
 local Lines = Instance.new('Frame')
-Lines.Name = "Lines"
+Lines.Name = "\0"
 Lines.Position = UDim2.new(0,-5,-0.19000010192394257,0)
 Lines.Size = UDim2.new(-0.0010000000474974513,1,1.2000000476837158,3)
 Lines.BackgroundColor3 = Color3.fromRGB(40,44,65)
@@ -1874,7 +1892,7 @@ Lines.BorderSizePixel = 0
 Lines.Parent = SaveText
 
 local Lines_2 = Instance.new('Frame')
-Lines_2.Name = "Lines"
+Lines_2.Name = "\0"
 Lines_2.Position = UDim2.new(1,0,-0.19000010192394257,0)
 Lines_2.Size = UDim2.new(-0.0010000000474974513,1,1.2000000476837158,3)
 Lines_2.BackgroundColor3 = Color3.fromRGB(40,44,65)
@@ -1883,7 +1901,7 @@ Lines_2.BorderSizePixel = 0
 Lines_2.Parent = SaveText
 
 local SaveArrow = Instance.new('ImageLabel')
-SaveArrow.Name = "Arrow"
+SaveArrow.Name = "\0"
 SaveArrow.Position = UDim2.new(0.7999997735023499,0,0.25000119805335999,0)
 SaveArrow.Size = UDim2.new(0.20000000298023224,0,1,0)
 SaveArrow.BackgroundTransparency = 1
@@ -1895,14 +1913,14 @@ SaveArrow.ZIndex = 15
 SaveArrow.Parent = Save
 
 local UIAspectRatioConstraint = Instance.new('UIAspectRatioConstraint')
-UIAspectRatioConstraint.Name = "UIAspectRatioConstraint"
+UIAspectRatioConstraint.Name = "\0"
 UIAspectRatioConstraint.AspectRatio = 2
 UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
 UIAspectRatioConstraint.Parent = SaveArrow
 
 
 	local TriggerSaveConfig = Instance.new("TextButton")
-	TriggerSaveConfig.Name = "TriggerSaveConfig"
+	TriggerSaveConfig.Name = "\0"
 	TriggerSaveConfig.Size = UDim2.new(1, 0, 1, 0)
 	TriggerSaveConfig.BackgroundTransparency = 1
 	TriggerSaveConfig.Text = ""
@@ -1911,7 +1929,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 	-- ── ConfigMainFrame (new design panel) ──────────────────────
 	local ConfigMainFrame = Instance.new("Frame")
-	ConfigMainFrame.Name = "ConfigMainFrame"
+	ConfigMainFrame.Name = "\0"
 	ConfigMainFrame.Position = UDim2.new(0, 0, 1.3, 0)
 	ConfigMainFrame.Size = UDim2.new(2.5, 0, 8, 0)
 	ConfigMainFrame.BackgroundColor3 = Color3.fromRGB(16,19,28)
@@ -1927,7 +1945,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 	do local a = Instance.new("UIAspectRatioConstraint"); a.AspectRatio = 1.5; a.Parent = ConfigMainFrame end
 
 	local CMHeader = Instance.new("Frame")
-	CMHeader.Name = "Header"
+	CMHeader.Name = "\0"
 	CMHeader.Size = UDim2.new(1, 0, 0.25, 0)
 	CMHeader.BackgroundColor3 = Color3.fromRGB(17,20,30)
 	CMHeader.BorderSizePixel = 0
@@ -1937,7 +1955,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 	-- Cloud icon
 	local CloudIcon = Instance.new("ImageLabel")
-	CloudIcon.Name = "CloudIcon"
+	CloudIcon.Name = "\0"
 	CloudIcon.Position = UDim2.new(0.037, 0, 0.27, 0)
 	CloudIcon.Size = UDim2.new(0.09, 0, 0.5, 0)
 	CloudIcon.BackgroundTransparency = 1
@@ -1949,7 +1967,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 	-- Title
 	local CMTitle = Instance.new("TextLabel")
-	CMTitle.Name = "TitleLabel"
+	CMTitle.Name = "\0"
 	CMTitle.Position = UDim2.new(0.14, 0, 0, 0)
 	CMTitle.Size = UDim2.new(0.3, 0, 1, 0)
 	CMTitle.BackgroundTransparency = 1
@@ -1963,7 +1981,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 	-- Header right buttons
 	local CMHeaderRight = Instance.new("Frame")
-	CMHeaderRight.Name = "HeaderRight"
+	CMHeaderRight.Name = "\0"
 	CMHeaderRight.Position = UDim2.new(0.65, 0, 0, 0)
 	CMHeaderRight.Size = UDim2.new(0.3, 0, 1, 0)
 	CMHeaderRight.BackgroundTransparency = 1
@@ -1982,7 +2000,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 	-- AutoSave button (toggle)
 	local autoSaveEnabled = false
 	local AutoSaveBtn = Instance.new("ImageButton")
-	AutoSaveBtn.Name = "AutomaticSave"
+	AutoSaveBtn.Name = "\0"
 	AutoSaveBtn.Size = UDim2.new(0.459, 0, 0.459, 0)
 	AutoSaveBtn.BackgroundTransparency = 1
 	AutoSaveBtn.Image = "rbxassetid://88602887448810"
@@ -1993,7 +2011,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 	-- RecentlyDeleted button
 	local RecentlyDeletedBtn = Instance.new("ImageButton")
-	RecentlyDeletedBtn.Name = "RecentlyDeleted"
+	RecentlyDeletedBtn.Name = "\0"
 	RecentlyDeletedBtn.Size = UDim2.new(0.459, 0, 0.459, 0)
 	RecentlyDeletedBtn.BackgroundTransparency = 1
 	RecentlyDeletedBtn.Image = "rbxassetid://124719621927271"
@@ -2005,7 +2023,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 	-- InsertConfig (add new) button
 	local InsertConfigBtn = Instance.new("ImageButton")
-	InsertConfigBtn.Name = "InsertConfig"
+	InsertConfigBtn.Name = "\0"
 	InsertConfigBtn.Size = UDim2.new(0.459, 0, 0.459, 0)
 	InsertConfigBtn.BackgroundTransparency = 1
 	InsertConfigBtn.Image = "rbxassetid://79421118238646"
@@ -2017,7 +2035,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 	-- Divider line
 	local CMLine = Instance.new("Frame")
-	CMLine.Name = "Line"
+	CMLine.Name = "\0"
 	CMLine.Position = UDim2.new(0.05, 0, 0.898, 0)
 	CMLine.Size = UDim2.new(0.9, 0, 0, 1)
 	CMLine.BackgroundColor3 = Color3.fromRGB(162, 162, 162)
@@ -2028,7 +2046,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 	-- ── Search Container ─────────────────────────────────────────
 	local SearchContainer = Instance.new("Frame")
-	SearchContainer.Name = "SearchContainer"
+	SearchContainer.Name = "\0"
 	SearchContainer.Position = UDim2.new(0.037, 0, 0.27, 0)
 	SearchContainer.Size = UDim2.new(0.928, 0, 0.143, 0)
 	SearchContainer.BackgroundColor3 = Color3.fromRGB(19,22,33)
@@ -2040,7 +2058,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 	do local a = Instance.new("UIAspectRatioConstraint"); a.AspectRatio = 10; a.AspectType = Enum.AspectType.ScaleWithParentSize; a.Parent = SearchContainer end
 
 	local SearchIconImg = Instance.new("ImageLabel")
-	SearchIconImg.Name = "SearchIcon"
+	SearchIconImg.Name = "\0"
 	SearchIconImg.Position = UDim2.new(0.025, 0, 0.25, 0)
 	SearchIconImg.Size = UDim2.new(0, 20, 0, 20)
 	SearchIconImg.BackgroundTransparency = 1
@@ -2051,7 +2069,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 	do local a = Instance.new("UIAspectRatioConstraint"); a.Parent = SearchIconImg end
 
 	local SearchBox = Instance.new("TextBox")
-	SearchBox.Name = "SearchBox"
+	SearchBox.Name = "\0"
 	SearchBox.Position = UDim2.new(0.12, 0, 0, 0)
 	SearchBox.Size = UDim2.new(0.85, 0, 1, 0)
 	SearchBox.BackgroundTransparency = 1
@@ -2068,7 +2086,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 	-- ── Config Name Input (shown when InsertConfig clicked) ──────
 	local NameInputContainer = Instance.new("Frame")
-	NameInputContainer.Name = "NameInputContainer"
+	NameInputContainer.Name = "\0"
 	NameInputContainer.Position = UDim2.new(0.037, 0, 0.27, 0)
 	NameInputContainer.Size = UDim2.new(0.928, 0, 0.143, 0)
 	NameInputContainer.BackgroundColor3 = Color3.fromRGB(19,22,33)
@@ -2081,7 +2099,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 	do local a = Instance.new("UIAspectRatioConstraint"); a.AspectRatio = 10; a.AspectType = Enum.AspectType.ScaleWithParentSize; a.Parent = NameInputContainer end
 
 	local NameOfConfig = Instance.new("TextBox")
-	NameOfConfig.Name = "NameOfConfig"
+	NameOfConfig.Name = "\0"
 	NameOfConfig.Position = UDim2.new(0.03, 0, 0, 0)
 	NameOfConfig.Size = UDim2.new(0.75, 0, 1, 0)
 	NameOfConfig.BackgroundTransparency = 1
@@ -2097,7 +2115,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 	NameOfConfig.Parent = NameInputContainer
 
 	local ConfirmAddBtn = Instance.new("TextButton")
-	ConfirmAddBtn.Name = "ConfirmAdd"
+	ConfirmAddBtn.Name = "\0"
 	ConfirmAddBtn.Position = UDim2.new(0.78, 0, 0.1, 0)
 	ConfirmAddBtn.Size = UDim2.new(0.2, 0, 0.8, 0)
 	ConfirmAddBtn.BackgroundColor3 = mainColor
@@ -2112,7 +2130,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 	-- ── List Container ────────────────────────────────────────────
 	local ListContainer = Instance.new("Frame")
-	ListContainer.Name = "ListContainer"
+	ListContainer.Name = "\0"
 	ListContainer.Position = UDim2.new(0.037, 0, 0.48, 0)
 	ListContainer.Size = UDim2.new(0.93, 0, 0.5, 0)
 	ListContainer.BackgroundTransparency = 1
@@ -2122,7 +2140,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 	ListContainer.Parent = ConfigMainFrame
 	do
 		local ll = Instance.new("UIListLayout")
-		ll.Name = "UIListLayout"
+		ll.Name = "\0"
 		ll.Padding = UDim.new(0, 6)
 		ll.Parent = ListContainer
 	end
@@ -2161,7 +2179,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 	-- ── Recently Deleted Panel ────────────────────────────────────
 	local RecentlyDeletedPanel = Instance.new("Frame")
-	RecentlyDeletedPanel.Name = "RecentlyDeletedPanel"
+	RecentlyDeletedPanel.Name = "\0"
 	RecentlyDeletedPanel.Position = UDim2.new(0, 0, 1.3, 0)
 	RecentlyDeletedPanel.Size = UDim2.new(2.5, 0, 6, 0)
 	RecentlyDeletedPanel.BackgroundColor3 = Color3.fromRGB(16,19,28)
@@ -2178,7 +2196,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 	-- RD Header
 	local RDHeader = Instance.new("Frame")
-	RDHeader.Name = "RDHeader"
+	RDHeader.Name = "\0"
 	RDHeader.Size = UDim2.new(1, 0, 0.22, 0)
 	RDHeader.BackgroundColor3 = Color3.fromRGB(17,20,30)
 	RDHeader.BorderSizePixel = 0
@@ -2187,7 +2205,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 	do local c = Instance.new("UICorner"); c.CornerRadius = UDim.new(0, 10); c.Parent = RDHeader end
 
 	local RDTitle = Instance.new("TextLabel")
-	RDTitle.Name = "RDTitle"
+	RDTitle.Name = "\0"
 	RDTitle.Position = UDim2.new(0.05, 0, 0, 0)
 	RDTitle.Size = UDim2.new(0.6, 0, 1, 0)
 	RDTitle.BackgroundTransparency = 1
@@ -2200,7 +2218,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 	RDTitle.Parent = RDHeader
 
 	local RDBackBtn = Instance.new("TextButton")
-	RDBackBtn.Name = "RDBackBtn"
+	RDBackBtn.Name = "\0"
 	RDBackBtn.Position = UDim2.new(0.82, 0, 0.2, 0)
 	RDBackBtn.Size = UDim2.new(0.14, 0, 0.6, 0)
 	RDBackBtn.BackgroundColor3 = Color3.fromRGB(23,26,39)
@@ -2215,7 +2233,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 	-- RD list
 	local RDList = Instance.new("Frame")
-	RDList.Name = "RDList"
+	RDList.Name = "\0"
 	RDList.Position = UDim2.new(0.037, 0, 0.28, 0)
 	RDList.Size = UDim2.new(0.926, 0, 0.7, 0)
 	RDList.BackgroundTransparency = 1
@@ -2232,7 +2250,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 		for i = #_deletedConfigs, 1, -1 do -- newest first
 			local entry = _deletedConfigs[i]
 			local drow = Instance.new("Frame")
-			drow.Name = "DeletedRow"
+			drow.Name = "\0"
 			drow.Size = UDim2.new(1, 0, 0, 0)
 			drow.BackgroundColor3 = Color3.fromRGB(35,18,18)
 			drow.BackgroundTransparency = 0.6
@@ -2256,7 +2274,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 			dlbl.Parent = drow
 
 			local restoreBtn = Instance.new("TextButton")
-			restoreBtn.Name = "Restore"
+			restoreBtn.Name = "\0"
 			restoreBtn.Position = UDim2.new(0.72, 0, 0.15, 0)
 			restoreBtn.Size = UDim2.new(0.24, 0, 0.7, 0)
 			restoreBtn.BackgroundColor3 = mainColor
@@ -2344,7 +2362,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 		-- "..." button
 		local SettingsBtn = Instance.new("TextButton")
-		SettingsBtn.Name = "Settings"
+		SettingsBtn.Name = "\0"
 		SettingsBtn.Position = UDim2.new(0.75, 0, 0, 0)
 		SettingsBtn.Size = UDim2.new(0.1, 0, 1, 0)
 		SettingsBtn.BackgroundTransparency = 1
@@ -2357,7 +2375,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 		-- Load/Save icon button
 		local LoadConfigBtn = Instance.new("ImageButton")
-		LoadConfigBtn.Name = "LoadConfig"
+		LoadConfigBtn.Name = "\0"
 		LoadConfigBtn.Position = UDim2.new(0.879, 0, 0.1, 0)
 		LoadConfigBtn.Size = UDim2.new(0.095, 0, 0.8, 0)
 		LoadConfigBtn.BackgroundTransparency = 1
@@ -2369,7 +2387,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 		-- ── Settings Frame (shown on "..." click) ─────────────────
 		local SettingsFrame = Instance.new("Frame")
-		SettingsFrame.Name = "SettingsFrame"
+		SettingsFrame.Name = "\0"
 		SettingsFrame.Position = UDim2.new(0.55, 0, 1, 4)
 		SettingsFrame.Size = UDim2.new(0.44, 0, 0, 0)
 		SettingsFrame.BackgroundColor3 = Color3.fromRGB(17,20,30)
@@ -2409,7 +2427,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 			end)
 			btn.MouseButton1Click:Connect(function()
 				SettingsFrame.Visible = false
-				callback()
+				SafeCall(callback)
 			end)
 			return btn
 		end
@@ -2484,7 +2502,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 
 		-- Close settings frame when clicking elsewhere on the row
 		local RowOverlay = Instance.new("TextButton")
-		RowOverlay.Name = "RowOverlay"
+		RowOverlay.Name = "\0"
 		RowOverlay.Size = UDim2.new(0.75, 0, 1, 0) -- covers everything except "..." and load btn
 		RowOverlay.BackgroundTransparency = 1
 		RowOverlay.Text = ""
@@ -2659,7 +2677,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 	end)
 
 	local SearchBox = New("TextBox", {
-		Name = "SearchBox",
+		Name = "\0",
 		Position = UDim2.new(0.44999998807907104, 0, 0.10000000149011612, 0),
 		Size = UDim2.new(0, 0, 0.6000000238418579, 0),
 		BackgroundColor3 = Color3.fromRGB(16,19,28),
@@ -2703,7 +2721,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 	end)
 
 	local TabHose = New("Frame", {
-		Name = "TabHose",
+		Name = "\0",
 		Position = UDim2.new(0.009999999776482582, 0, 0.092, 0),
 		Size = UDim2.new(0.9900000095367432, 0, 0.8960000033378601, 0),
 		BackgroundColor3 = Color3.fromRGB(162, 162, 161),
@@ -2751,7 +2769,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 	end)
 
 	local Line3 = Instance.new('Frame')
-	Line3.Name = "Line3"
+	Line3.Name = "\0"
 	Line3.Position = UDim2.new(-0.009999999776482582,0,0,0)
 	Line3.Size = UDim2.new(0,1,1,0)
 	Line3.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -2760,7 +2778,7 @@ UIAspectRatioConstraint.Parent = SaveArrow
 	Line3.Parent = Frame2
 
 local Line9 = Instance.new('Frame')
-Line9.Name = "Line9"
+Line9.Name = "\0"
 Line9.Position = UDim2.new(0.22900649905204773,0,0.07999999821186066,0)
 Line9.Size = UDim2.new(0.7600772976875305,0,0,1)
 Line9.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -2769,7 +2787,7 @@ Line9.BorderSizePixel = 0
 Line9.Parent = MainFrame
 
 	local Line1 = Instance.new('Frame')
-	Line1.Name = "Line1"
+	Line1.Name = "\0"
 	Line1.Position = UDim2.new(0.009999999776482582,0,0.08,0)
 	Line1.Size = UDim2.new(0.20900000631809235,0,0,1)
 	Line1.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -2778,7 +2796,7 @@ Line9.Parent = MainFrame
 	Line1.Parent = MainFrame
 
 	local Line4 = Instance.new('Frame')
-	Line4.Name = "Line4"
+	Line4.Name = "\0"
 	Line4.Position = UDim2.new(0.00800000037997961,0,0.8999999761581421,0)
 	Line4.Size = UDim2.new(0.20900000631809235,0,0,1)
 	Line4.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -2791,7 +2809,7 @@ Line9.Parent = MainFrame
 
 	
 	local ToggleBtn = Instance.new("TextButton")
-	ToggleBtn.Name = "ToggleBtn"
+	ToggleBtn.Name = "\0"
 	ToggleBtn.Position = UDim2.new(0, 10, 0, 10)
    ToggleBtn.BackgroundTransparency = 1
    ToggleBtn.Active = true
@@ -2808,7 +2826,7 @@ Line9.Parent = MainFrame
 	do local c = Instance.new("UICorner"); c.CornerRadius = UDim.new(0, 6); c.Parent = ToggleBtn end
 	
 local DropShadow = Instance.new("ImageLabel")
-DropShadow.Name = "DropShadow"
+DropShadow.Name = "\0"
 	DropShadow.Parent = ToggleBtn
 	DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
 	DropShadow.BackgroundTransparency = 1.000
@@ -2871,7 +2889,7 @@ end
 	function WindowObj:AddTabLabel(text)
 		tabOrder = tabOrder + 1
 		local lbl = New("TextLabel", {
-			Name = "TabLabel",
+			Name = "\0",
 			Size = UDim2.new(0.800000011920929, 0, 0.010999999940395355, 0),
 			BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 			BackgroundTransparency = 1,
@@ -2897,7 +2915,7 @@ end
 		local isFirst = tabIndex == 1
 
 		local TabButtonFrame = New("Frame", {
-			Name = "TabButton",
+			Name = "\0",
 			Size = UDim2.new(1, 0, 0.028999999165534973, 0),
 			BackgroundColor3 = isFirst and Color3.fromRGB(255,255,255) or Color3.fromRGB(25,28,42),
 			BackgroundTransparency = isFirst and 0.9 or 1,
@@ -2910,7 +2928,7 @@ end
 		}, TabButtonFrame)
 
 		local TabIcon = New("ImageLabel", {
-			Name = "TabIcon",
+			Name = "\0",
 			Position = UDim2.new(0.1,0,0.5,0),
          AnchorPoint = Vector2.new(0.5, 0.5),
 			Size = UDim2.new(0.20000000298023224, 0, 0.6500000011920929, 0),
@@ -2929,7 +2947,7 @@ New("UIAspectRatioConstraint", {
 		}, TabIcon)
 
 		local TabText = New("TextLabel", {
-			Name = "TabText",
+			Name = "\0",
 			Position = UDim2.new(0.23000000417232513, 0, 0.235, 0),
 			Size = UDim2.new(0.7070000171661377, 0, 0.510000011920929, 0),
 			BackgroundColor3 = Color3.fromRGB(191, 255, 255),
@@ -3032,13 +3050,13 @@ New("UIListLayout", { Padding = UDim.new(0, 15), SortOrder = Enum.SortOrder.Layo
 			New("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }, Section)
 
 local SexstionLabel = Instance.new('Frame')
-SexstionLabel.Name = "SexstionLabel"
+SexstionLabel.Name = "\0"
 SexstionLabel.Size = UDim2.new(0.5,0,0.05999999865889549,0)
 SexstionLabel.BackgroundTransparency = 1
 SexstionLabel.Parent = Section
 
 local UIAspectRatioConstraint = Instance.new('UIAspectRatioConstraint')
-UIAspectRatioConstraint.Name = "UIAspectRatioConstraint"
+UIAspectRatioConstraint.Name = "\0"
 UIAspectRatioConstraint.AspectRatio = 11
 UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
 UIAspectRatioConstraint.Parent = SexstionLabel
@@ -3059,7 +3077,7 @@ SectionLabel.TextXAlignment = Enum.TextXAlignment.Left
 SectionLabel.Parent = SexstionLabel
 
 local UIAspectRatioConstraint_2 = Instance.new('UIAspectRatioConstraint')
-UIAspectRatioConstraint_2.Name = "UIAspectRatioConstraint"
+UIAspectRatioConstraint_2.Name = "\0"
 UIAspectRatioConstraint_2.AspectRatio = 13
 UIAspectRatioConstraint_2.AspectType = Enum.AspectType.ScaleWithParentSize
 UIAspectRatioConstraint_2.Parent = SectionLabel
@@ -3081,7 +3099,7 @@ UIAspectRatioConstraint_2.Parent = SectionLabel
 			}, Elements)
 
 local UIStroke = Instance.new('UIStroke')
-UIStroke.Name = "UIStroke"
+UIStroke.Name = "\0"
 UIStroke.Color = Color3.fromRGB(162, 162, 162)
 UIStroke.Transparency = 0.900000000023
 UIStroke.Parent = Elements
@@ -3104,7 +3122,7 @@ UIStroke.Parent = Elements
 				end
 
 				local SettingsBtn = New("TextButton", {
-					Name = "Settings",
+					Name = "\0",
 					Position = btnPosition,
 					Size = UDim2.new(0.1000000596046448, 0, 0.6, 0),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -3118,7 +3136,7 @@ UIStroke.Parent = Elements
 				}, parentFrame)
 
 				local SettingsFrame = Instance.new('Frame')
-				SettingsFrame.Name = "SettingsFrame"
+				SettingsFrame.Name = "\0"
 				SettingsFrame.Position = UDim2.new(1, 4, 0, 0)
 				SettingsFrame.Size = UDim2.new(1, 0, 0, 20)
 				SettingsFrame.BackgroundColor3 = Color3.fromRGB(17,20,30)
@@ -3131,17 +3149,17 @@ UIStroke.Parent = Elements
 				SettingsFrame.Parent = parentFrame
 
 				local UICorner = Instance.new('UICorner')
-				UICorner.Name = "UICorner"
+				UICorner.Name = "\0"
 				UICorner.Parent = SettingsFrame
 
 				local UIStroke = Instance.new('UIStroke')
-				UIStroke.Name = "UIStroke"
+				UIStroke.Name = "\0"
 				UIStroke.Color = Color3.fromRGB(40,44,65)
 				UIStroke.Transparency = 0.9
 				UIStroke.Parent = SettingsFrame
 
 				local SFLabelContainer = Instance.new('TextLabel')
-				SFLabelContainer.Name = "LabelContainer"
+				SFLabelContainer.Name = "\0"
 				SFLabelContainer.Position = UDim2.new(0.05000000074505806, 0, 0, 0)
 				SFLabelContainer.Size = UDim2.new(1, 0, 0.30000001192092896, 0)
 				SFLabelContainer.BackgroundColor3 = Color3.fromRGB(162, 162, 162)
@@ -3155,13 +3173,13 @@ UIStroke.Parent = Elements
 				SFLabelContainer.Parent = SettingsFrame
 
 				local SFLabelAspect = Instance.new('UIAspectRatioConstraint')
-				SFLabelAspect.Name = "UIAspectRatioConstraint"
+				SFLabelAspect.Name = "\0"
 				SFLabelAspect.AspectRatio = 14
 				SFLabelAspect.AspectType = Enum.AspectType.ScaleWithParentSize
 				SFLabelAspect.Parent = SFLabelContainer
 
 				local SFContainer = Instance.new('Frame')
-				SFContainer.Name = "Container"
+				SFContainer.Name = "\0"
             SFContainer.AnchorPoint = Vector2.new(0, 0.1)
 				SFContainer.Position = UDim2.new(0.05000000074505806, 0, 1, 0)
 				SFContainer.Size = UDim2.new(0.9, 0, 0.9700000286102295, 20)
@@ -3173,14 +3191,14 @@ UIStroke.Parent = Elements
 				SFContainer.Parent = SettingsFrame
 
 				local SFLayout = Instance.new('UIListLayout')
-				SFLayout.Name = "UIListLayout"
+				SFLayout.Name = "\0"
 				SFLayout.Padding = UDim.new(0, 3)
 				SFLayout.SortOrder = Enum.SortOrder.LayoutOrder
 				SFLayout.Parent = SFContainer
 
 				New("UICorner", {}, SFContainer)
 				New("UIStroke", {
-					Name = "UIStroke",
+					Name = "\0",
 					Color = Color3.fromRGB(255,255,255),
 					Transparency = 0.9,
 					ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
@@ -3219,7 +3237,7 @@ UIStroke.Parent = Elements
 					local enabled = default or false
 
 					local Toggle = New("Frame", {
-						Name = "Toggle",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 0, 28),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 						BackgroundTransparency = 1,
@@ -3227,13 +3245,13 @@ UIStroke.Parent = Elements
 					}, SettingsFrame_Container)
 
 local UIAspectRatioConstraint = Instance.new('UIAspectRatioConstraint')
-UIAspectRatioConstraint.Name = "UIAspectRatioConstraint"
+UIAspectRatioConstraint.Name = "\0"
 UIAspectRatioConstraint.AspectRatio = 7.5
 UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
 UIAspectRatioConstraint.Parent = Toggle
 
 					New("Frame", {
-						Name = "Lines",
+						Name = "\0",
 						Position = UDim2.new(0.05, 0, 1, 0),
 						Size = UDim2.new(0.9, 0, 0, 1),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -3268,7 +3286,7 @@ UIAspectRatioConstraint.Parent = Toggle
 					New("UIStroke", { Transparency = 0.800000011920929, Thickness = 0.800000011920929 }, Effect)
 
 					local Icon = New("Frame", {
-						Name = "Icon",
+						Name = "\0",
 						Position = enabled and UDim2.new(0.41100209951400757, 0, 0.04500000551342964, 0) or UDim2.new(0.08, 0, 0.04500000551342964, 0),
 						Size = UDim2.new(1, 0, 0.8999999761581421, 0),
 						BackgroundColor3 = Color3.fromRGB(255, 255, 255),
@@ -3289,7 +3307,7 @@ UIAspectRatioConstraint.Parent = Toggle
 						enabled = val
 						Tween(Effect, { BackgroundColor3 = enabled and mainColor or Color3.fromRGB(0, 0, 0) }, 0.25, Enum.EasingStyle.Quad)
 						Tween(Icon, { Position = enabled and UDim2.new(0.41100209951400757, 0, 0.04500000551342964, 0) or UDim2.new(0.08, 0, 0.04500000551342964, 0), BackgroundTransparency = enabled and 0 or 0.5 }, 0.25, Enum.EasingStyle.Back)
-						if callback then callback(enabled) end
+						if callback then SafeCall(callback, enabled) end
 					end
 
 					Btn.MouseButton1Click:Connect(function() Set(not enabled) end)
@@ -3306,7 +3324,7 @@ UIAspectRatioConstraint.Parent = Toggle
 					local enabled = default or false
 
 					local CheckBoxToggle = New("Frame", {
-						Name = "CheckBoxToggle",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 0, 28),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 						BackgroundTransparency = 1,
@@ -3320,7 +3338,7 @@ UIAspectRatioConstraint.Parent = Toggle
 					
 
 					local CheckBox = New("Frame", {
-						Name = "CheckBox",
+						Name = "\0",
 						Position = UDim2.new(0.04, 0, 0.3, 0),
 						Size = UDim2.new(0.075, 0, 0.7, 0),
 						BackgroundTransparency = 1,
@@ -3330,7 +3348,7 @@ UIAspectRatioConstraint.Parent = Toggle
 					New("UIAspectRatioConstraint", {}, CheckBox)
 
 					local Check = New("ImageLabel", {
-						Name = "Check",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 1, 0),
 						BackgroundTransparency = 1,
 						Image = "rbxassetid://138494545053627",
@@ -3363,7 +3381,7 @@ UIAspectRatioConstraint.Parent = Toggle
 					local function Set(val)
 						enabled = val
 						Tween(Check, { ImageTransparency = enabled and 0.1 or 1 }, 0.2)
-						if callback then callback(enabled) end
+						if callback then SafeCall(callback, enabled) end
 					end
 
 					Btn.MouseButton1Click:Connect(function() Set(not enabled) end)
@@ -3385,7 +3403,7 @@ UIAspectRatioConstraint.Parent = Toggle
 					local dragging = false
 
 					local Slider = New("Frame", {
-						Name = "Slider",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 0.20000000298023224, 0),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 						BackgroundTransparency = 1,
@@ -3394,13 +3412,13 @@ UIAspectRatioConstraint.Parent = Toggle
 					}, SettingsFrame_Container)
 
 local UIAspectRatioConstraint = Instance.new('UIAspectRatioConstraint')
-UIAspectRatioConstraint.Name = "UIAspectRatioConstraint"
+UIAspectRatioConstraint.Name = "\0"
 UIAspectRatioConstraint.AspectRatio = 7.5
 UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
 UIAspectRatioConstraint.Parent = Slider
 
 					New("Frame", {
-						Name = "Lines",
+						Name = "\0",
 						Position = UDim2.new(0.05, 0, 1, 0),
 						Size = UDim2.new(0.9, 0, 0, 1),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -3434,7 +3452,7 @@ UIAspectRatioConstraint.Parent = Slider
 					}, Slider)
 
 					local SliderValue = New("TextLabel", {
-						Name = "SliderValue",
+						Name = "\0",
 						Position = UDim2.new(0.6990000009536743, 0, 0.10000000149011612, 0),
 						Size = UDim2.new(0.25, 0, 0.8080000281333923, 0),
 						BackgroundColor3 = Color3.fromRGB(33,37,53),
@@ -3448,7 +3466,7 @@ UIAspectRatioConstraint.Parent = Slider
 					New("UICorner", { CornerRadius = UDim.new(0, 5) }, SliderValue)
 
 					local Line = New("Frame", {
-						Name = "Line",
+						Name = "\0",
 						Position = UDim2.new(0.03999999910593033, 0, 0.3190000057220459, 0),
 						Size = UDim2.new(0.6000000238418579, 0, 0.24, 0),
 						BackgroundColor3 = Color3.fromRGB(33,37,53),
@@ -3465,7 +3483,7 @@ UIAspectRatioConstraint.Parent = Slider
 					New("UICorner", { CornerRadius = UDim.new(1, 0) }, InLine)
 
 					local Trigger = New("TextButton", {
-						Name = "Trigger",
+						Name = "\0",
 						Position = UDim2.new(0.10000000149011612, 0, -1.8000000715255737, 0),
 						Size = UDim2.new(1.1999999284744263, 0, 4.200000286102295, 0),
 						AnchorPoint = Vector2.new(0.800000011920929, 0),
@@ -3488,7 +3506,7 @@ UIAspectRatioConstraint.Parent = Slider
 						Tween(InLine, { Size = UDim2.fromScale(sizeScale, 1) }, 0.1)
 						Trigger.Position = UDim2.new(sizeScale, 0, -1.8000000715255737, 0)
 						SliderValue.Text = tostring(value) .. suffix
-						if callback then callback(value) end
+						if callback then SafeCall(callback, value) end
 					end
 
 					Line.InputBegan:Connect(function(input)
@@ -3514,7 +3532,7 @@ UIAspectRatioConstraint.Parent = Slider
 						InLine.Size = UDim2.fromScale(ratio, 1)
 						Trigger.Position = UDim2.new(ratio, 0, -1.8000000715255737, 0)
 						SliderValue.Text = tostring(value) .. suffix
-						if callback then callback(value) end
+						if callback then SafeCall(callback, value) end
 					end
 					function obj:Get() return value end
 					table.insert(_registeredElements, { key = "settings_slider_" .. text, obj = obj })
@@ -3529,7 +3547,7 @@ UIAspectRatioConstraint.Parent = Slider
 					local selectedBtns = {}
 
 					local Selection = New("Frame", {
-						Name = "Selection",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 0, 28),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 						BackgroundTransparency = 1,
@@ -3543,7 +3561,7 @@ UIAspectRatioConstraint.Parent = Slider
 					}, Selection)
 
 					New("Frame", {
-						Name = "Lines",
+						Name = "\0",
 						Position = UDim2.new(0.05000000074505806, 0, 1, 0),
 						Size = UDim2.new(0.8999999761581421, 0, 0, 1),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -3568,7 +3586,7 @@ UIAspectRatioConstraint.Parent = Slider
 					}, Selection)
 
 					local SelArrow = New("ImageLabel", {
-						Name = "TextArrow",
+						Name = "\0",
 						Position = UDim2.new(0.8700000047683716, 0, 0.15000000596046448, 0),
 						Size = UDim2.new(0.10000000149011612, 0, 0.800000011920929, 0),
 						BackgroundColor3 = Color3.fromRGB(28,32,48),
@@ -3582,7 +3600,7 @@ UIAspectRatioConstraint.Parent = Slider
 					}, Selection)
 
 					local TextDefault = New("TextLabel", {
-						Name = "TextDefault",
+						Name = "\0",
 						Position = UDim2.new(0.6400001645088196, 0, 0.2499999850988388, 0),
 						Size = UDim2.new(0.23000000417232513, 0, 0.6000000238418579, 0),
 						BackgroundColor3 = Color3.fromRGB(28,32,48),
@@ -3597,7 +3615,7 @@ UIAspectRatioConstraint.Parent = Slider
 					}, Selection)
 
 					local DropPopup = New("Frame", {
-						Name = "Dropdown",
+						Name = "\0",
 						Position = UDim2.new(1, 0, 0, 0),
 						Size = UDim2.new(0.6899999737739563, 0, 0, 100),
 						BackgroundColor3 = Color3.fromRGB(16,19,28),
@@ -3614,7 +3632,7 @@ UIAspectRatioConstraint.Parent = Slider
 					}, DropPopup)
 
 					local DropContainer = New("Frame", {
-						Name = "Container",
+						Name = "\0",
 						Position = UDim2.new(0.05000000074505806, 0, 0.10000000149011612, 0),
 						Size = UDim2.new(0.8980000019073486, 0, 0.800000011920929, 0),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -3650,7 +3668,7 @@ UIAspectRatioConstraint.Parent = Slider
 
 					for i, opt in ipairs(options) do
 						local BtnRow = New("Frame", {
-							Name = "Buttons",
+							Name = "\0",
 							Size = UDim2.new(1, 0, 0.20000000298023224, 0),
 							BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 							BackgroundTransparency = 1,
@@ -3663,7 +3681,7 @@ UIAspectRatioConstraint.Parent = Slider
 						}, BtnRow)
 
 						New("TextLabel", {
-							Name = "Label",
+							Name = "\0",
 							Position = UDim2.new(0, 0, 0.20000000298023224, 0),
 							Size = UDim2.new(1, 0, 0.6990000009536743, 0),
 							BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -3678,7 +3696,7 @@ UIAspectRatioConstraint.Parent = Slider
 						}, BtnRow)
 
 						local SelBtn = New("TextButton", {
-							Name = "Selected",
+							Name = "\0",
 							Position = UDim2.new(0.800000011920929, 0, 0, 0),
 							Size = UDim2.new(0.20000000298023224, 0, 0.800000011920929, 0),
 							BackgroundColor3 = Color3.fromRGB(16,19,28),
@@ -3700,16 +3718,16 @@ UIAspectRatioConstraint.Parent = Slider
 						}, BtnRow)
 						RowBtn.MouseButton1Click:Connect(function()
 							selected = opt; TextDefault.Text = opt; updateCheckmarks(); closeDropdown()
-							if callback then callback(opt) end
+							if callback then SafeCall(callback, opt) end
 						end)
 						SelBtn.MouseButton1Click:Connect(function()
 							selected = opt; TextDefault.Text = opt; updateCheckmarks(); closeDropdown()
-							if callback then callback(opt) end
+							if callback then SafeCall(callback, opt) end
 						end)
 					end
 
 					local OpenBtn = New("TextButton", {
-						Name = "OpenBtn",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 1, 0),
 						BackgroundTransparency = 1,
 						Text = "",
@@ -3729,7 +3747,7 @@ UIAspectRatioConstraint.Parent = Slider
 					if default ~= nil then selected = default; TextDefault.Text = default; updateCheckmarks() end
 
 					local obj = {}
-					function obj:Set(val, silent) selected = val; TextDefault.Text = val; updateCheckmarks(); if not silent and callback then callback(val) end end
+					function obj:Set(val, silent) selected = val; TextDefault.Text = val; updateCheckmarks(); if not silent and callback then SafeCall(callback, val) end end
 					function obj:Get() return selected end
 					table.insert(_registeredElements, { key = "settings_dropdown_" .. text, obj = obj })
 					return obj
@@ -3744,7 +3762,7 @@ UIAspectRatioConstraint.Parent = Slider
 					local SlideDown = false
 
 					local Colorpicker = New("Frame", {
-						Name = "Colorpicker",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 0, 28),
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
@@ -3754,13 +3772,13 @@ UIAspectRatioConstraint.Parent = Slider
 					}, SettingsFrame_Container)
 
 local UIAspectRatioConstraint = Instance.new('UIAspectRatioConstraint')
-UIAspectRatioConstraint.Name = "UIAspectRatioConstraint"
+UIAspectRatioConstraint.Name = "\0"
 UIAspectRatioConstraint.AspectRatio = 7.5
 UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
 UIAspectRatioConstraint.Parent = Colorpicker
 
 					New("Frame", {
-						Name = "Lines",
+						Name = "\0",
 						Position = UDim2.new(0.05, 0, 1, 0),
 						Size = UDim2.new(0.89, 0, 0, 1),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -3783,7 +3801,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					}, Colorpicker)
 
 					local colorpickerButton = New("ImageButton", {
-						Name = "colorpickerButton",
+						Name = "\0",
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.new(0.875, 0, 0.57, 0),
 						Size = UDim2.new(0.08, 0, 0.5, 0),
@@ -3795,7 +3813,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					New("UICorner", { CornerRadius = UDim.new(0, 6) }, colorpickerButton)
 
 					local colorpickerFrame = New("Frame", {
-						Name = "colorpickerFrame",
+						Name = "\0",
 						Position = UDim2.new(1.1, 0, 0, 0),
 						Size = UDim2.new(1, 0, 7, 0),
 						BackgroundColor3 = Color3.fromRGB(15,17,26),
@@ -3809,7 +3827,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					New("UIAspectRatioConstraint", { AspectRatio = 1.1 }, colorpickerFrame)
 
 					local RGB = New("ImageButton", {
-						Name = "RGB",
+						Name = "\0",
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
 						Position = UDim2.new(0.067, 0, 0.068, 0),
@@ -3820,7 +3838,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					}, colorpickerFrame)
 
 					local RGBCircle = New("ImageLabel", {
-						Name = "RGBCircle",
+						Name = "\0",
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
 						Size = UDim2.new(0, 14, 0, 14),
@@ -3831,7 +3849,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					}, RGB)
 
 					local Darkness = New("ImageButton", {
-						Name = "Darkness",
+						Name = "\0",
 						BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 						BorderSizePixel = 0,
 						Position = UDim2.new(0.831940293, 0, 0.068, 0),
@@ -3842,7 +3860,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					}, colorpickerFrame)
 
 					local DarknessCircle = New("Frame", {
-						Name = "DarknessCircle",
+						Name = "\0",
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 						BorderSizePixel = 0,
@@ -3887,7 +3905,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 						colorpickerButton.BackgroundColor3 = c
 						Darkness.BackgroundColor3 = c
 						DarknessCircle.BackgroundColor3 = c
-						if callback then callback(c) end
+						if callback then SafeCall(callback, c) end
 					end
 
 					local function mouseLocation()
@@ -3906,7 +3924,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 						local realcolor = Color3.fromHSV(color[1], color[2], color[3])
 						DarknessCircle.BackgroundColor3 = realcolor
 						DarknessCircle.Position = UDim2.new(0.5, 0, y, -cy)
-						if callback then callback(realcolor) end
+						if callback then SafeCall(callback, realcolor) end
 						update()
 					end
 
@@ -3929,7 +3947,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 						local realcolor = Color3.fromHSV(color[1], color[2], color[3])
 						Darkness.BackgroundColor3 = realcolor
 						DarknessCircle.BackgroundColor3 = realcolor
-						if callback then callback(realcolor) end
+						if callback then SafeCall(callback, realcolor) end
 						update()
 					end
 
@@ -3996,7 +4014,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					function obj:Set(c)
 						local h2, s2, v2 = Color3.toHSV(c)
 						setcolor({h2, s2, v2})
-						if callback then callback(c) end
+						if callback then SafeCall(callback, c) end
 					end
 					function obj:Get()
 						return Color3.fromHSV(color[1], color[2], color[3])
@@ -4014,7 +4032,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				local enabled = default or false
 
 				local Toggle = New("Frame", {
-					Name = "Toggle",
+					Name = "\0",
 					Size = UDim2.new(1, 0, 0.20000000298023224, 0),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 					BackgroundTransparency = 1,
@@ -4026,7 +4044,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, Toggle)
 
 				New("Frame", {
-					Name = "Lines",
+					Name = "\0",
 					Position = UDim2.new(0.05, 0, 1, 0),
 					Size = UDim2.new(0.9, 0, 0, 1),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -4059,7 +4077,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UIStroke", { Transparency = 0.800000011920929, Thickness = 0.800000011920929 }, Effect)
 
 				local Icon = New("Frame", {
-					Name = "Icon",
+					Name = "\0",
 					Position = enabled and UDim2.new(0.41100209951400757, 0, 0.04500000551342964, 0) or UDim2.new(0.08, 0, 0.04500000551342964, 0),
 					Size = UDim2.new(1, 0, 0.8999999761581421, 0),
 					BackgroundColor3 = Color3.fromRGB(255,255,255),
@@ -4079,7 +4097,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					enabled = val
 					Tween(Effect, { BackgroundColor3 = enabled and mainColor or Color3.fromRGB(0, 0, 0) }, 0.25, Enum.EasingStyle.Quad)
 					Tween(Icon, { Position = enabled and UDim2.new(0.41100209951400757, 0, 0.04500000551342964, 0) or UDim2.new(0.08, 0, 0.04500000551342964, 0), BackgroundTransparency = enabled and 0 or 0.5 }, 0.25, Enum.EasingStyle.Back)
-					if callback then callback(enabled) end
+					if callback then SafeCall(callback, enabled) end
 				end
 
 				Btn.MouseButton1Click:Connect(function() Set(not enabled) end)
@@ -4098,7 +4116,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				local color = defaultColor or Color3.fromRGB(255, 0, 0)
 
 				local ToggleWithColorPicker = New("Frame", {
-					Name = "ToggleWithColorPicker",
+					Name = "\0",
 					Size = UDim2.new(1, 0, 0.20000000298023224, 0),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 					BackgroundTransparency = 1,
@@ -4110,7 +4128,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, ToggleWithColorPicker)
 
 				New("Frame", {
-					Name = "Lines",
+					Name = "\0",
 					Position = UDim2.new(0.05, 0, 1, 0),
 					Size = UDim2.new(0.9, 0, 0, 1),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -4129,7 +4147,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UIStroke", { Transparency = 0.800000011920929, Thickness = 0.800000011920929 }, Effect)
 
 				local Icon = New("Frame", {
-					Name = "Icon",
+					Name = "\0",
 					Position = enabled and UDim2.new(0.41100209951400757, 0, 0.04500000551342964, 0) or UDim2.new(0.08, 0, 0.04500000551342964, 0),
 					Size = UDim2.new(1, 0, 0.8999999761581421, 0),
 					BackgroundColor3 = Color3.fromRGB(255, 255, 255),
@@ -4162,7 +4180,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					enabled = val
 					Tween(Effect, { BackgroundColor3 = enabled and mainColor or Color3.fromRGB(0, 0, 0) }, 0.25, Enum.EasingStyle.Quad)
 					Tween(Icon, { Position = enabled and UDim2.new(0.41100209951400757, 0, 0.04500000551342964, 0) or UDim2.new(0.08, 0, 0.04500000551342964, 0) }, 0.25, Enum.EasingStyle.Back)
-					if callback then callback(color, enabled) end
+					if callback then SafeCall(callback, color, enabled) end
 				end
 
 				Btn.MouseButton1Click:Connect(function() Set(not enabled) end)
@@ -4181,7 +4199,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 			end
 
 			function SectionObj:AddToggleColorpicker(text, defaultEnabled, defaultColor, callback, colorCallback)
-				-- if colorCallback provided, use separate callbacks; otherwise use old combined callback(color, enabled)
+				-- if colorCallback provided, use separate callbacks; otherwise use old combined SafeCall(callback, color, enabled)
 				elemCount = elemCount + 1
 				local enabled = defaultEnabled or false
 				local color = { Color3.toHSV(defaultColor or Color3.fromRGB(255, 255, 255)) }
@@ -4190,7 +4208,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				local SlideDown = false
 
 				local Toggle = New("Frame", {
-					Name = "Toggle",
+					Name = "\0",
 					Size = UDim2.new(1, 0, 0.20000000298023224, 0),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 					BackgroundTransparency = 1,
@@ -4202,7 +4220,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, Toggle)
 
 				New("Frame", {
-					Name = "Lines",
+					Name = "\0",
 					Position = UDim2.new(0.05, 0, 1, 0),
 					Size = UDim2.new(0.9, 0, 0, 1),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -4236,7 +4254,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UIStroke", { Transparency = 0.800000011920929, Thickness = 0.800000011920929 }, Effect)
 
 				local Icon = New("Frame", {
-					Name = "Icon",
+					Name = "\0",
 					Position = enabled and UDim2.new(0.41100209951400757, 0, 0.04500000551342964, 0) or UDim2.new(0.08, 0, 0.04500000551342964, 0),
 					Size = UDim2.new(1, 0, 0.8999999761581421, 0),
 					BackgroundColor3 = Color3.fromRGB(255, 255, 255),
@@ -4247,7 +4265,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 
 				-- Colorpicker open button (small colored square)
 				local cpBtn = New("ImageButton", {
-					Name = "ColorpickerOpenButton",
+					Name = "\0",
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.7900000214576721,0,0.55308997631073,0),
                Size = UDim2.new(0.06800000369548798,0,0.5600000023841858,0),
@@ -4260,7 +4278,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 
 				-- Colorpicker panel
 				local cpFrame = New("Frame", {
-					Name = "Frame",
+					Name = "\0",
 					Position = UDim2.new(1.100000023841858, 0, 0, 0),
 					Size = UDim2.new(1, 0, 7, 0),
 					BackgroundColor3 = Color3.fromRGB(15,17,26),
@@ -4274,7 +4292,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UIAspectRatioConstraint", { AspectRatio = 1.100000023841858 }, cpFrame)
 
 				local RGB = New("ImageButton", {
-					Name = "ImageButton",
+					Name = "\0",
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					Position = UDim2.new(0.06700000166893005, 0, 0.06800000369548798, 0),
@@ -4285,7 +4303,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, cpFrame)
 
 				local RGBCircle = New("ImageLabel", {
-					Name = "ImageLabel",
+					Name = "\0",
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					Size = UDim2.new(0, 14, 0, 14),
@@ -4294,7 +4312,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, RGB)
 
 				local Darkness = New("ImageButton", {
-					Name = "ImageButton",
+					Name = "\0",
 					BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 					BorderSizePixel = 0,
 					Position = UDim2.new(0.8319402933120728, 0, 0.06800000369548798, 0),
@@ -4305,7 +4323,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, cpFrame)
 
 				local DarknessCircle = New("Frame", {
-					Name = "Frame",
+					Name = "\0",
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 					BorderSizePixel = 0,
@@ -4316,7 +4334,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UICorner", { CornerRadius = UDim.new(1, 0) }, DarknessCircle)
 
 				local colorHex = New("TextLabel", {
-					Name = "Hex",
+					Name = "\0",
 					BackgroundColor3 = Color3.fromRGB(15,17,26),
 					Position = UDim2.new(0.0717131495475769, 0, 0.8550000190734863, 0),
 					Size = UDim2.new(0.4399999976158142, 0, 0.09000000357627869, 0),
@@ -4329,7 +4347,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UICorner", { CornerRadius = UDim.new(0, 4) }, colorHex)
 
 				local Copy = New("TextButton", {
-					Name = "Copy",
+					Name = "\0",
 					BackgroundColor3 = Color3.fromRGB(15,17,26),
 					Position = UDim2.new(0.5400000214576721, 0, 0.8550000190734863, 0),
 					Size = UDim2.new(0.38999998569488525, 0, 0.09000000357627869, 0),
@@ -4361,8 +4379,8 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					cpBtn.BackgroundColor3 = c
 					Darkness.BackgroundColor3 = c
 					DarknessCircle.BackgroundColor3 = c
-					if colorCallback then colorCallback(c)
-					elseif callback then callback(enabled, c) end
+					if colorCallback then SafeCall(colorCallback, c)
+					elseif callback then SafeCall(callback, enabled, c) end
 				end
 
 				local function mouseLocation()
@@ -4411,8 +4429,8 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					enabled = val
 					Tween(Effect, { BackgroundColor3 = enabled and mainColor or Color3.fromRGB(0, 0, 0) }, 0.25, Enum.EasingStyle.Quad)
 					Tween(Icon, { Position = enabled and UDim2.new(0.41100209951400757, 0, 0.04500000551342964, 0) or UDim2.new(0.08, 0, 0.04500000551342964, 0), BackgroundTransparency = enabled and 0 or 0.5 }, 0.25, Enum.EasingStyle.Back)
-					if colorCallback then callback(enabled)
-					elseif callback then callback(enabled, Color3.fromHSV(color[1], color[2], color[3])) end
+					if colorCallback then SafeCall(callback, enabled)
+					elseif callback then SafeCall(callback, enabled, Color3.fromHSV(color[1], color[2], color[3])) end
 				end
 
 				Btn.MouseButton1Click:Connect(function()
@@ -4468,8 +4486,8 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					DarknessCircle.BackgroundColor3 = rc
 					color = {tbl[1], tbl[2], tbl[3]}
 					if fireCallback then
-						if colorCallback then colorCallback(rc)
-						elseif callback then callback(enabled, rc) end
+						if colorCallback then SafeCall(colorCallback, rc)
+						elseif callback then SafeCall(callback, enabled, rc) end
 					end
 				end
 				setcolor(color)
@@ -4501,7 +4519,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				local dragging = false
 
 				local Slider = New("Frame", {
-					Name = "Slider",
+					Name = "\0",
 					Size = UDim2.new(1, 0, 0.20000000298023224, 0),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 					BackgroundTransparency = 1,
@@ -4513,7 +4531,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, Slider)
 
 				New("Frame", {
-					Name = "Lines",
+					Name = "\0",
 					Position = UDim2.new(0.05, 0, 1, 0),
 					Size = UDim2.new(0.9, 0, 0, 1),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -4545,7 +4563,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, Slider)
 
 				local SliderValue = New("TextLabel", {
-					Name = "SliderValue",
+					Name = "\0",
 					Position = UDim2.new(0.6990000009536743, 0, 0.10000000149011612, 0),
 					Size = UDim2.new(0.25, 0, 0.8080000281333923, 0),
 					BackgroundColor3 = Color3.fromRGB(32, 35, 50),
@@ -4558,7 +4576,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UICorner", { CornerRadius = UDim.new(0, 5) }, SliderValue)
 
 				local Line = New("Frame", {
-					Name = "Line",
+					Name = "\0",
 					Position = UDim2.new(0.03999999910593033, 0, 0.3190000057220459, 0),
 					Size = UDim2.new(0.6000000238418579, 0, 0.15000000596046448, 0),
 					BackgroundColor3 = Color3.fromRGB(33,37,53),
@@ -4574,7 +4592,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UICorner", { CornerRadius = UDim.new(1, 0) }, InLine)
 
 				local Trigger = New("TextButton", {
-					Name = "Trigger",
+					Name = "\0",
 					Position = UDim2.new(0.10000000149011612, 0, -1.8000000715255737, 0),
 					Size = UDim2.new(1.1999999284744263, 0, 4.200000286102295, 0),
 					AnchorPoint = Vector2.new(0.800000011920929, 0),
@@ -4596,7 +4614,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					Tween(InLine, { Size = UDim2.fromScale(sizeScale, 1) }, 0.1)
 					Trigger.Position = UDim2.new(sizeScale, 0, -1.8000000715255737, 0)
 					SliderValue.Text = tostring(value) .. suffix
-					if callback then callback(value) end
+					if callback then SafeCall(callback, value) end
 				end
 
 				Line.InputBegan:Connect(function(input)
@@ -4628,7 +4646,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					InLine.Size = UDim2.fromScale(ratio, 1)
 					Trigger.Position = UDim2.new(ratio, 0, -1.8000000715255737, 0)
 					SliderValue.Text = tostring(value) .. suffix
-					if callback then callback(value) end
+					if callback then SafeCall(callback, value) end
 				end
 				function obj:Get() return value end
 				function obj:AddSettings() return MakeSettings(Slider, "slider", text) end
@@ -4647,7 +4665,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				local dropOpen = false
 
 				local Dropdown = New("Frame", {
-					Name = "Dropdown",
+					Name = "\0",
 					Size = UDim2.new(1, 0, 0.20000000298023224, 0),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 					BackgroundTransparency = 1,
@@ -4660,7 +4678,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, Dropdown)
 
 				New("Frame", {
-					Name = "Lines",
+					Name = "\0",
 					Position = UDim2.new(0.05, 0, 1, 0),
 					Size = UDim2.new(0.9, 0, 0, 1),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -4684,7 +4702,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, Dropdown)
 
 				local TopBar = New("TextButton", {
-					Name = "TopBar",
+					Name = "\0",
 					Position = UDim2.new(0.498, 0, 0.25, 0),
 			      Size = UDim2.new(0.46, 0, 0.600000024, 0),
 				   BackgroundColor3 = Color3.fromRGB(32, 35, 50),
@@ -4700,7 +4718,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UICorner", { CornerRadius = UDim.new(0, 5) }, TopBar)
 
 				local Arrow = New("ImageLabel", {
-					Name = "Arrow",
+					Name = "\0",
 					Position = UDim2.new(0.799999988079071, 0, 0.17, 0),
 					Size = UDim2.new(0.20000001192092896, 0, 0.6, 0),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -4713,7 +4731,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, TopBar)
 
 				local DownBar = New("Frame", {
-					Name = "DownBar",
+					Name = "\0",
 					Position = UDim2.new(0.56, 0, 0, 0),
 					Size = UDim2.new(0.5, 0, 0, 0),
 					BackgroundColor3 = Color3.fromRGB(16,19,28),
@@ -4725,7 +4743,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UIStroke", { Color = Color3.fromRGB(255, 255, 255), Transparency = 0.98, Thickness = 5 }, DownBar)
 
 				local Scrolls = New("ScrollingFrame", {
-					Name = "Scrolls",
+					Name = "\0",
 					Size = UDim2.new(1, 0, 1, 0),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 					BackgroundTransparency = 1,
@@ -4751,7 +4769,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 
 				for _, opt in ipairs(options) do
 					local Buttons = New("TextButton", {
-						Name = "Buttons",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 0, 16),
 						BackgroundColor3 = Color3.fromRGB(32, 35, 50),
 						BackgroundTransparency = 1,
@@ -4774,7 +4792,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					Buttons.MouseButton1Click:Connect(function()
 						selected = opt
 						TopBar.Text = opt
-						if callback then callback(opt) end
+						if callback then SafeCall(callback, opt) end
 						closeDropdown()
 					end)
 				end
@@ -4797,7 +4815,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				end)
 
 				local obj = {}
-				function obj:Set(val, silent) selected = val; TopBar.Text = val; if not silent and callback then callback(val) end end
+				function obj:Set(val, silent) selected = val; TopBar.Text = val; if not silent and callback then SafeCall(callback, val) end end
 				function obj:Get() return selected end
 				function obj:AddSettings() return MakeSettings(Dropdown, "dropdown", text) end
 				
@@ -4819,7 +4837,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 
 				-- Root row frame (matches design exactly)
 				local Dropdown = New("Frame", {
-					Name = "Dropdown",
+					Name = "\0",
 					Size = UDim2.new(1, 0, 0.20000000298023224, 0),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 					BackgroundTransparency = 1,
@@ -4832,7 +4850,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, Dropdown)
 
 				New("Frame", {
-					Name = "Lines",
+					Name = "\0",
 					Position = UDim2.new(0.05000000074505806, 0, 1, 0),
 					Size = UDim2.new(0.8999999761581421, 0, 0, 1),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -4842,7 +4860,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, Dropdown)
 
 				New("TextLabel", {
-					Name = "TextDropdown",
+					Name = "\0",
 					Position = UDim2.new(0.04800000086426735, 0, 0.30000001192092896, 0),
 					Size = UDim2.new(0.6000000238418579, 0, 0.5000000238418579, 0),
 					BackgroundColor3 = Color3.fromRGB(28,32,48),
@@ -4857,7 +4875,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 
 				-- Colorpicker open button (small colored square, always visible)
 				local cpBtn = New("ImageButton", {
-					Name = "ColorpickerOpenButton",
+					Name = "\0",
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.44,0,0.55308997631073,0),
                Size = UDim2.new(0.06800000369548798,0,0.5600000023841858,0),
@@ -4870,7 +4888,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 
 				-- Dropdown TopBar (shifted right to leave room for cpBtn)
 				local TopBar = New("TextButton", {
-					Name = "TopBar",
+					Name = "\0",
 					Position = UDim2.new(0.498, 0, 0.25, 0),
 					Size = UDim2.new(0.46, 0, 0.6000000238418579, 0),
 					BackgroundColor3 = Color3.fromRGB(32, 35, 50),
@@ -4886,7 +4904,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UICorner", { CornerRadius = UDim.new(0, 5) }, TopBar)
 
 				local Arrow = New("ImageLabel", {
-					Name = "Arrow",
+					Name = "\0",
 					Position = UDim2.new(0.799999, 0, 0.17, 1),
 					Size = UDim2.new(0.20000001192092896, 0, 0.6, 0),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -4900,7 +4918,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 
 				-- Dropdown list frame
 				local DownBar = New("Frame", {
-					Name = "DownBar",
+					Name = "\0",
 					Position = UDim2.new(0.56, 0, 0, 0),
 					Size = UDim2.new(0.5, 0, 0, 0),
 					BackgroundColor3 = Color3.fromRGB(16,19,28),
@@ -4916,7 +4934,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, DownBar)
 
 				local Scrolls = New("ScrollingFrame", {
-					Name = "Scrolls",
+					Name = "\0",
 					Size = UDim2.new(1, 0, 1, 0),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 					BackgroundTransparency = 1,
@@ -4941,7 +4959,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 
 				for _, opt in ipairs(options) do
 					local Btn = New("TextButton", {
-						Name = "Buttons",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 0, 16),
 						BackgroundColor3 = Color3.fromRGB(32, 35, 50),
 						BackgroundTransparency = 1,
@@ -4966,9 +4984,9 @@ UIAspectRatioConstraint.Parent = Colorpicker
 						TopBar.Text = opt
 						closeDropdown()
 						if colorCallback then
-							if callback then callback(opt) end
+							if callback then SafeCall(callback, opt) end
 						elseif callback then
-							callback(opt, Color3.fromHSV(color[1], color[2], color[3]))
+							SafeCall(callback, opt, Color3.fromHSV(color[1], color[2], color[3]))
 						end
 					end)
 				end
@@ -4992,7 +5010,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 
 				-- Colorpicker panel
 				local cpFrame = New("Frame", {
-					Name = "colorpickerFrame",
+					Name = "\0",
 					Position = UDim2.new(1.1, 0, 0, 0),
 					Size = UDim2.new(1, 0, 7, 0),
 					BackgroundColor3 = Color3.fromRGB(15,17,26),
@@ -5006,7 +5024,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UIAspectRatioConstraint", { AspectRatio = 1.1 }, cpFrame)
 
 				local RGB = New("ImageButton", {
-					Name = "RGB",
+					Name = "\0",
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					Position = UDim2.new(0.067, 0, 0.068, 0),
@@ -5017,7 +5035,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, cpFrame)
 
 				local RGBCircle = New("ImageLabel", {
-					Name = "RGBCircle",
+					Name = "\0",
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					Size = UDim2.new(0, 14, 0, 14),
@@ -5028,7 +5046,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, RGB)
 
 				local Darkness = New("ImageButton", {
-					Name = "Darkness",
+					Name = "\0",
 					BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 					BorderSizePixel = 0,
 					Position = UDim2.new(0.831940293, 0, 0.068, 0),
@@ -5039,7 +5057,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, cpFrame)
 
 				local DarknessCircle = New("Frame", {
-					Name = "DarknessCircle",
+					Name = "\0",
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 					BorderSizePixel = 0,
@@ -5050,7 +5068,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UICorner", { CornerRadius = UDim.new(1, 0) }, DarknessCircle)
 
 				local colorHex = New("TextLabel", {
-					Name = "colorHex",
+					Name = "\0",
 					BackgroundColor3 = Color3.fromRGB(15,17,26),
 					Position = UDim2.new(0.0717131495, 0, 0.855, 0),
 					Size = UDim2.new(0.44, 0, 0.09, 0),
@@ -5063,7 +5081,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UICorner", { CornerRadius = UDim.new(0, 4) }, colorHex)
 
 				local Copy = New("TextButton", {
-					Name = "Copy",
+					Name = "\0",
 					BackgroundColor3 = Color3.fromRGB(15,17,26),
 					Position = UDim2.new(0.54, 0, 0.855, 0),
 					Size = UDim2.new(0.39, 0, 0.09, 0),
@@ -5087,8 +5105,8 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					Darkness.BackgroundColor3 = c
 					DarknessCircle.BackgroundColor3 = c
 					if fireCallback then
-						if colorCallback then colorCallback(c)
-						elseif callback then callback(selected, c) end
+						if colorCallback then SafeCall(colorCallback, c)
+						elseif callback then SafeCall(callback, selected, c) end
 					end
 				end
 
@@ -5183,8 +5201,8 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				local obj = {}
 				function obj:Set(val) selected = val; TopBar.Text = val or "Select";
 					if colorCallback then
-						if callback then callback(val) end
-					elseif callback then callback(val, Color3.fromHSV(color[1], color[2], color[3])) end
+						if callback then SafeCall(callback, val) end
+					elseif callback then SafeCall(callback, val, Color3.fromHSV(color[1], color[2], color[3])) end
 				end
 				function obj:Get() return selected end
 				function obj:SetColor(c)
@@ -5217,7 +5235,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				local SlideDown = false
 
 				local Colorpicker = New("Frame", {
-					Name = "Colorpicker",
+					Name = "\0",
 					Size = UDim2.new(1, 0, 0.20000000298023224, 0),
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
@@ -5228,7 +5246,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UIAspectRatioConstraint", { AspectRatio = 9, AspectType = Enum.AspectType.ScaleWithParentSize }, Colorpicker)
 
 				New("Frame", {
-					Name = "Lines",
+					Name = "\0",
 					Position = UDim2.new(0.05, 0, 1, 0),
 					Size = UDim2.new(0.89, 0, 0, 1),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -5254,7 +5272,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, Colorpicker)
 
 				local colorpickerButton = New("ImageButton", {
-					Name = "colorpickerButton",
+					Name = "\0",
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.875, 0, 0.57, 0),
 					Size = UDim2.new(0.068, 0, 0.56, 0),
@@ -5266,7 +5284,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UICorner", { CornerRadius = UDim.new(0, 6) }, colorpickerButton)
 
 				local colorpickerFrame = New("Frame", {
-					Name = "colorpickerFrame",
+					Name = "\0",
 					Position = UDim2.new(1.1, 0, 0, 0),
 					Size = UDim2.new(1, 0, 7, 0),
 					BackgroundColor3 = Color3.fromRGB(15,17,26),
@@ -5280,7 +5298,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UIAspectRatioConstraint", { AspectRatio = 1.1 }, colorpickerFrame)
 
 				local RGB = New("ImageButton", {
-					Name = "RGB",
+					Name = "\0",
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					Position = UDim2.new(0.067, 0, 0.068, 0),
@@ -5291,7 +5309,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, colorpickerFrame)
 
 				local RGBCircle = New("ImageLabel", {
-					Name = "RGBCircle",
+					Name = "\0",
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					Size = UDim2.new(0, 14, 0, 14),
@@ -5302,7 +5320,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, RGB)
 
 				local Darkness = New("ImageButton", {
-					Name = "Darkness",
+					Name = "\0",
 					BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 					BorderSizePixel = 0,
 					Position = UDim2.new(0.831940293, 0, 0.068, 0),
@@ -5313,7 +5331,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				}, colorpickerFrame)
 
 				local DarknessCircle = New("Frame", {
-					Name = "DarknessCircle",
+					Name = "\0",
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 					BorderSizePixel = 0,
@@ -5324,7 +5342,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UICorner", { CornerRadius = UDim.new(1, 0) }, DarknessCircle)
 
 				local colorHex = New("TextLabel", {
-					Name = "colorHex",
+					Name = "\0",
 					BackgroundColor3 = Color3.fromRGB(15,17,26),
 					Position = UDim2.new(0.0717131495, 0, 0.855, 0),
 					Size = UDim2.new(0.44, 0, 0.09, 0),
@@ -5337,7 +5355,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				New("UICorner", { CornerRadius = UDim.new(0, 4) }, colorHex)
 
 				local Copy = New("TextButton", {
-					Name = "Copy",
+					Name = "\0",
 					BackgroundColor3 = Color3.fromRGB(15,17,26),
 					Position = UDim2.new(0.54, 0, 0.855, 0),
 					Size = UDim2.new(0.39, 0, 0.09, 0),
@@ -5362,7 +5380,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					colorpickerButton.BackgroundColor3 = c
 					Darkness.BackgroundColor3 = c
 					DarknessCircle.BackgroundColor3 = c
-					if options.callback then options.callback(c) end
+					if options.callback then options.SafeCall(callback, c) end
 				end
 
 				local function mouseLocation()
@@ -5381,7 +5399,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					local realcolor = Color3.fromHSV(color[1], color[2], color[3])
 					DarknessCircle.BackgroundColor3 = realcolor
 					DarknessCircle.Position = UDim2.new(0.5, 0, y, -cy)
-					if options.callback then options.callback(realcolor) end
+					if options.callback then options.SafeCall(callback, realcolor) end
 					update()
 				end
 
@@ -5404,7 +5422,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					local realcolor = Color3.fromHSV(color[1], color[2], color[3])
 					Darkness.BackgroundColor3 = realcolor
 					DarknessCircle.BackgroundColor3 = realcolor
-					if options.callback then options.callback(realcolor) end
+					if options.callback then options.SafeCall(callback, realcolor) end
 					update()
 				end
 
@@ -5480,7 +5498,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				function obj:Set(c)
 					local h2, s2, v2 = Color3.toHSV(c)
 					setcolor({h2, s2, v2})
-					if callback then callback(c) end
+					if callback then SafeCall(callback, c) end
 				end
 				function obj:Get()
 					return Color3.fromHSV(color[1], color[2], color[3])
@@ -5494,7 +5512,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				elemCount = elemCount + 1
 
 				local DropdownSection = Instance.new('Frame')
-				DropdownSection.Name = "Accordion"
+				DropdownSection.Name = "\0"
 				DropdownSection.Size = UDim2.new(1, 0, 0.20000000298023224, 0)
 				DropdownSection.BackgroundColor3 = Color3.fromRGB(21,24,36)
 				DropdownSection.BackgroundTransparency = 1
@@ -5502,13 +5520,13 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				DropdownSection.Parent = Elements
 
 				local UIAspectRatioConstraint = Instance.new('UIAspectRatioConstraint')
-				UIAspectRatioConstraint.Name = "UIAspectRatioConstraint"
+				UIAspectRatioConstraint.Name = "\0"
 				UIAspectRatioConstraint.AspectRatio = 9
 				UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
 				UIAspectRatioConstraint.Parent = DropdownSection
 
 				local TextArrow = Instance.new('ImageLabel')
-				TextArrow.Name = "TextArrow"
+				TextArrow.Name = "\0"
 				TextArrow.Position = UDim2.new(0.8699999737739563, 0, 0.1, 0)
 				TextArrow.AnchorPoint = Vector2.new(0, 0)
 				TextArrow.Size = UDim2.new(0.06, 0, 0.8, 0)
@@ -5521,7 +5539,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				TextArrow.Parent = DropdownSection
 
 				local Text = Instance.new('TextLabel')
-				Text.Name = "Text"
+				Text.Name = "\0"
 				Text.Position = UDim2.new(0.04800000041723251, 0, 0.30000001192092896, 0)
 				Text.Size = UDim2.new(0.6600000262260437, 0, 0.5000000238418579, 0)
 				Text.BackgroundColor3 = Color3.fromRGB(28,32,48)
@@ -5535,7 +5553,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				Text.Parent = DropdownSection
 
 				local Open = Instance.new('TextButton')
-				Open.Name = "Open"
+				Open.Name = "\0"
 				Open.Size = UDim2.new(1, 0, 1, 0)
 				Open.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Open.BackgroundTransparency = 1
@@ -5544,7 +5562,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				Open.Parent = DropdownSection
 
 				local Section2Frame = Instance.new('Frame')
-				Section2Frame.Name = "AccordionFrame"
+				Section2Frame.Name = "\0"
 				Section2Frame.Position = UDim2.new(1, 4, 0, 0)
 				Section2Frame.Size = UDim2.new(1, 0, 0, 20)
 				Section2Frame.BackgroundColor3 = Color3.fromRGB(17,20,30)
@@ -5556,17 +5574,17 @@ UIAspectRatioConstraint.Parent = Colorpicker
 				Section2Frame.Parent = DropdownSection
 
 				local UICorner = Instance.new('UICorner')
-				UICorner.Name = "UICorner"
+				UICorner.Name = "\0"
 				UICorner.Parent = Section2Frame
 
 				local UIStroke = Instance.new('UIStroke')
-				UIStroke.Name = "UIStroke"
+				UIStroke.Name = "\0"
 				UIStroke.Color = Color3.fromRGB(255, 255, 255)
 				UIStroke.Transparency = 0.9
 				UIStroke.Parent = Section2Frame
 
 local LabelContainer = Instance.new('TextLabel')
-LabelContainer.Name = "LabelContainer"
+LabelContainer.Name = "\0"
 LabelContainer.Position = UDim2.new(0.05000000074505806,0,0,0)
 LabelContainer.Size = UDim2.new(1,0,0.30000001192092896,0)
 LabelContainer.BackgroundColor3 = Color3.fromRGB(162,162,162)
@@ -5581,14 +5599,14 @@ LabelContainer.TextXAlignment = Enum.TextXAlignment.Left
 LabelContainer.Parent = Section2Frame
 
 local UIAspectRatioConstraint = Instance.new('UIAspectRatioConstraint')
-UIAspectRatioConstraint.Name = "UIAspectRatioConstraint"
+UIAspectRatioConstraint.Name = "\0"
 UIAspectRatioConstraint.AspectRatio = 14
 UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
 UIAspectRatioConstraint.Parent = LabelContainer
 
 
 				local Container = Instance.new('Frame')
-				Container.Name = "Container"
+				Container.Name = "\0"
 				Container.Position = UDim2.new(0.05000000074505806, 0, 1, 0)
 				Container.Size = UDim2.new(0.9, 0, 0.9700000286102295, 20)
 				Container.BackgroundColor3 = Color3.fromRGB(162, 162, 162)
@@ -5600,21 +5618,21 @@ UIAspectRatioConstraint.Parent = LabelContainer
 				Container.Parent = Section2Frame
 
 				local UIListLayout = Instance.new('UIListLayout')
-				UIListLayout.Name = "UIListLayout"
+				UIListLayout.Name = "\0"
 				UIListLayout.Padding = UDim.new(0, 3)
 				UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 				UIListLayout.Parent = Container
 
 				New("UICorner", {}, Container)
 				New("UIStroke", {
-					Name = "UIStroke",
+					Name = "\0",
 					Color = Color3.fromRGB(255,255,255),
 					Transparency = 0.9,
 					ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 				}, Container)
 
 				New("Frame", {
-					Name = "Lines",
+					Name = "\0",
 					Position = UDim2.new(0.05, 0, 1, 0),
 					Size = UDim2.new(0.9, 0, 0, 1),
 					BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -5661,7 +5679,7 @@ UIAspectRatioConstraint.Parent = LabelContainer
 					local enabled = default or false
 
 					local Toggle = New("Frame", {
-						Name = "Toggle",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 0, 28),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 						BackgroundTransparency = 1,
@@ -5669,13 +5687,13 @@ UIAspectRatioConstraint.Parent = LabelContainer
 					}, Container)
 
 local UIAspectRatioConstraint = Instance.new('UIAspectRatioConstraint')
-UIAspectRatioConstraint.Name = "UIAspectRatioConstraint"
+UIAspectRatioConstraint.Name = "\0"
 UIAspectRatioConstraint.AspectRatio = 7.5
 UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
 UIAspectRatioConstraint.Parent = Toggle
 
 					New("Frame", {
-						Name = "Lines",
+						Name = "\0",
 						Position = UDim2.new(0.05, 0, 1, 0),
 						Size = UDim2.new(0.9, 0, 0, 1),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -5710,7 +5728,7 @@ UIAspectRatioConstraint.Parent = Toggle
 					New("UIStroke", { Transparency = 0.800000011920929, Thickness = 0.800000011920929 }, Effect)
 
 					local Icon = New("Frame", {
-						Name = "Icon",
+						Name = "\0",
 						Position = enabled and UDim2.new(0.41100209951400757, 0, 0.04500000551342964, 0) or UDim2.new(0.08, 0, 0.04500000551342964, 0),
 						Size = UDim2.new(1, 0, 0.8999999761581421, 0),
 						BackgroundColor3 = Color3.fromRGB(255, 255, 255),
@@ -5731,7 +5749,7 @@ UIAspectRatioConstraint.Parent = Toggle
 						enabled = val
 						Tween(Effect, { BackgroundColor3 = enabled and mainColor or Color3.fromRGB(0, 0, 0) }, 0.25, Enum.EasingStyle.Quad)
 						Tween(Icon, { Position = enabled and UDim2.new(0.41100209951400757, 0, 0.04500000551342964, 0) or UDim2.new(0.08, 0, 0.04500000551342964, 0), BackgroundTransparency = enabled and 0 or 0.5 }, 0.25, Enum.EasingStyle.Back)
-						if callback then callback(enabled) end
+						if callback then SafeCall(callback, enabled) end
 					end
 
 					Btn.MouseButton1Click:Connect(function() Set(not enabled) end)
@@ -5748,7 +5766,7 @@ UIAspectRatioConstraint.Parent = Toggle
 					local enabled = default or false
 
 					local CheckBoxToggle = New("Frame", {
-						Name = "CheckBoxToggle",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 0, 28),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 						BackgroundTransparency = 1,
@@ -5762,7 +5780,7 @@ UIAspectRatioConstraint.Parent = Toggle
 				
 
 					local CheckBox = New("Frame", {
-						Name = "CheckBox",
+						Name = "\0",
 						Position = UDim2.new(0.04, 0, 0.3, 0),
 						Size = UDim2.new(0.075, 0, 0.7, 0),
 						BackgroundTransparency = 1,
@@ -5772,7 +5790,7 @@ UIAspectRatioConstraint.Parent = Toggle
 					New("UIAspectRatioConstraint", {}, CheckBox)
 
 					local Check = New("ImageLabel", {
-						Name = "Check",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 1, 0),
 						BackgroundTransparency = 1,
 						Image = "rbxassetid://138494545053627",
@@ -5805,7 +5823,7 @@ UIAspectRatioConstraint.Parent = Toggle
 					local function Set(val)
 						enabled = val
 						Tween(Check, { ImageTransparency = enabled and 0.1 or 1 }, 0.2)
-						if callback then callback(enabled) end
+						if callback then SafeCall(callback, enabled) end
 					end
 
 					Btn.MouseButton1Click:Connect(function() Set(not enabled) end)
@@ -5831,7 +5849,7 @@ UIAspectRatioConstraint.Parent = Toggle
 
 					-- Selection row frame (matches new design: AspectRatio=10)
 					local Selection = New("Frame", {
-						Name = "Selection",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 0, 28),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 						BackgroundTransparency = 1,
@@ -5845,7 +5863,7 @@ UIAspectRatioConstraint.Parent = Toggle
 					}, Selection)
 
 					New("Frame", {
-						Name = "Lines",
+						Name = "\0",
 						Position = UDim2.new(0.05000000074505806, 0, 1, 0),
 						Size = UDim2.new(0.8999999761581421, 0, 0, 1),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -5871,7 +5889,7 @@ UIAspectRatioConstraint.Parent = Toggle
 
 					-- Arrow indicator
 					local SelArrow = New("ImageLabel", {
-						Name = "TextArrow",
+						Name = "\0",
 						Position = UDim2.new(0.8700000047683716,0,0.15000000596046448,0),
 						Size = UDim2.new(0.10000000149011612, 0, 0.800000011920929, 0),
 						BackgroundColor3 = Color3.fromRGB(28,32,48),
@@ -5886,7 +5904,7 @@ UIAspectRatioConstraint.Parent = Toggle
 
 					-- TextDefault shows the currently selected value
 					local TextDefault = New("TextLabel", {
-						Name = "TextDefault",
+						Name = "\0",
 						Position = UDim2.new(0.6400001645088196,0,0.2499999850988388,0),
 						Size = UDim2.new(0.23000000417232513, 0, 0.6000000238418579, 0),
 						BackgroundColor3 = Color3.fromRGB(28,32,48),
@@ -5902,7 +5920,7 @@ UIAspectRatioConstraint.Parent = Toggle
 
 					-- Popup dropdown frame (new style: slides from right, position=(1,0,0,0))
 					local DropPopup = New("Frame", {
-						Name = "Dropdown",
+						Name = "\0",
 						Position = UDim2.new(1, 0, 0, 0),
 						Size = UDim2.new(0.6899999737739563, 0, 0, 100),
 						BackgroundColor3 = Color3.fromRGB(16,19,28),
@@ -5920,7 +5938,7 @@ UIAspectRatioConstraint.Parent = Toggle
 
 					-- Inner container for buttons
 					local DropContainer = New("Frame", {
-						Name = "Container",
+						Name = "\0",
 						Position = UDim2.new(0.05000000074505806, 0, 0.10000000149011612, 0),
 						Size = UDim2.new(0.8980000019073486, 0, 0.800000011920929, 0),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -5957,7 +5975,7 @@ UIAspectRatioConstraint.Parent = Toggle
 
 					for i, opt in ipairs(options) do
 						local BtnRow = New("Frame", {
-							Name = "Buttons",
+							Name = "\0",
 							Size = UDim2.new(1, 0, 0.20000000298023224, 0),
 							BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 							BackgroundTransparency = 1,
@@ -5970,7 +5988,7 @@ UIAspectRatioConstraint.Parent = Toggle
 						}, BtnRow)
 
 						local Label = New("TextLabel", {
-							Name = "Label",
+							Name = "\0",
 							Position = UDim2.new(0, 0, 0.20000000298023224, 0),
 							Size = UDim2.new(1, 0, 0.6990000009536743, 0),
 							BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -5985,7 +6003,7 @@ UIAspectRatioConstraint.Parent = Toggle
 						}, BtnRow)
 
 						local SelBtn = New("TextButton", {
-							Name = "Selected",
+							Name = "\0",
 							Position = UDim2.new(0.800000011920929, 0, 0, 0),
 							Size = UDim2.new(0.20000000298023224, 0, 0.800000011920929, 0),
 							BackgroundColor3 = Color3.fromRGB(16,19,28),
@@ -6012,20 +6030,20 @@ UIAspectRatioConstraint.Parent = Toggle
 							TextDefault.Text = opt
 							updateCheckmarks()
 							closeDropdown2()
-							if callback then callback(opt) end
+							if callback then SafeCall(callback, opt) end
 						end)
 						SelBtn.MouseButton1Click:Connect(function()
 							selected = opt
 							TextDefault.Text = opt
 							updateCheckmarks()
 							closeDropdown2()
-							if callback then callback(opt) end
+							if callback then SafeCall(callback, opt) end
 						end)
 					end
 
 					-- Open button (invisible overlay on the row)
 					local OpenBtn = New("TextButton", {
-						Name = "OpenBtn",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 1, 0),
 						BackgroundTransparency = 1,
 						Text = "",
@@ -6051,7 +6069,7 @@ UIAspectRatioConstraint.Parent = Toggle
 						selected = val
 						TextDefault.Text = val
 						updateCheckmarks()
-						if not silent and callback then callback(val) end
+						if not silent and callback then SafeCall(callback, val) end
 					end
 					function obj:Get() return selected end
 					if default ~= nil then obj:Set(default, true) end
@@ -6069,7 +6087,7 @@ UIAspectRatioConstraint.Parent = Toggle
 					local dragging = false
 
 					local Slider = New("Frame", {
-						Name = "Slider",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 0.20000000298023224, 0),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
 						BackgroundTransparency = 1,
@@ -6078,13 +6096,13 @@ UIAspectRatioConstraint.Parent = Toggle
 					}, Container)
 
 local UIAspectRatioConstraint = Instance.new('UIAspectRatioConstraint')
-UIAspectRatioConstraint.Name = "UIAspectRatioConstraint"
+UIAspectRatioConstraint.Name = "\0"
 UIAspectRatioConstraint.AspectRatio = 7.5
 UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
 UIAspectRatioConstraint.Parent = Slider
 
 					New("Frame", {
-						Name = "Lines",
+						Name = "\0",
 						Position = UDim2.new(0.05, 0, 1, 0),
 						Size = UDim2.new(0.9, 0, 0, 1),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -6118,7 +6136,7 @@ UIAspectRatioConstraint.Parent = Slider
 					}, Slider)
 
 					local SliderValue = New("TextLabel", {
-						Name = "SliderValue",
+						Name = "\0",
 						Position = UDim2.new(0.6990000009536743, 0, 0.10000000149011612, 0),
 						Size = UDim2.new(0.25, 0, 0.8080000281333923, 0),
 						BackgroundColor3 = Color3.fromRGB(33,37,53),
@@ -6132,7 +6150,7 @@ UIAspectRatioConstraint.Parent = Slider
 					New("UICorner", { CornerRadius = UDim.new(0, 5) }, SliderValue)
 
 					local Line = New("Frame", {
-						Name = "Line",
+						Name = "\0",
 						Position = UDim2.new(0.03999999910593033, 0, 0.3190000057220459, 0),
 						Size = UDim2.new(0.6000000238418579, 0, 0.24, 0),
 						BackgroundColor3 = Color3.fromRGB(33,37,53),
@@ -6149,7 +6167,7 @@ UIAspectRatioConstraint.Parent = Slider
 					New("UICorner", { CornerRadius = UDim.new(1, 0) }, InLine)
 
 					local Trigger = New("TextButton", {
-						Name = "Trigger",
+						Name = "\0",
 						Position = UDim2.new(0.10000000149011612, 0, -1.8000000715255737, 0),
 						Size = UDim2.new(1.1999999284744263, 0, 4.200000286102295, 0),
 						AnchorPoint = Vector2.new(0.800000011920929, 0),
@@ -6172,7 +6190,7 @@ UIAspectRatioConstraint.Parent = Slider
 						Tween(InLine, { Size = UDim2.fromScale(sizeScale, 1) }, 0.1)
 						Trigger.Position = UDim2.new(sizeScale, 0, -1.8000000715255737, 0)
 						SliderValue.Text = tostring(value) .. suffix
-						if callback then callback(value) end
+						if callback then SafeCall(callback, value) end
 					end
 
 					Line.InputBegan:Connect(function(input)
@@ -6198,7 +6216,7 @@ UIAspectRatioConstraint.Parent = Slider
 						InLine.Size = UDim2.fromScale(ratio, 1)
 						Trigger.Position = UDim2.new(ratio, 0, -1.8000000715255737, 0)
 						SliderValue.Text = tostring(value) .. suffix
-						if callback then callback(value) end
+						if callback then SafeCall(callback, value) end
 					end
 					function obj:Get() return value end
 					table.insert(_registeredElements, { key = "accordion_slider_" .. text2, obj = obj })
@@ -6214,7 +6232,7 @@ UIAspectRatioConstraint.Parent = Slider
 					local SlideDown = false
 
 					local Colorpicker = New("Frame", {
-						Name = "Colorpicker",
+						Name = "\0",
 						Size = UDim2.new(1, 0, 0, 28),
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
@@ -6224,13 +6242,13 @@ UIAspectRatioConstraint.Parent = Slider
 					}, Container)
 
 local UIAspectRatioConstraint = Instance.new('UIAspectRatioConstraint')
-UIAspectRatioConstraint.Name = "UIAspectRatioConstraint"
+UIAspectRatioConstraint.Name = "\0"
 UIAspectRatioConstraint.AspectRatio = 7.5
 UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
 UIAspectRatioConstraint.Parent = Colorpicker
 
 					New("Frame", {
-						Name = "Lines",
+						Name = "\0",
 						Position = UDim2.new(0.05, 0, 1, 0),
 						Size = UDim2.new(0.89, 0, 0, 1),
 						BackgroundColor3 = Color3.fromRGB(162, 162, 162),
@@ -6253,7 +6271,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					}, Colorpicker)
 
 					local colorpickerButton = New("ImageButton", {
-						Name = "colorpickerButton",
+						Name = "\0",
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.new(0.875, 0, 0.57, 0),
 						Size = UDim2.new(0.08, 0, 0.5, 0),
@@ -6265,7 +6283,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					New("UICorner", { CornerRadius = UDim.new(0, 6) }, colorpickerButton)
 
 					local colorpickerFrame = New("Frame", {
-						Name = "colorpickerFrame",
+						Name = "\0",
 						Position = UDim2.new(1.1, 0, 0, 0),
 						Size = UDim2.new(1, 0, 7, 0),
 						BackgroundColor3 = Color3.fromRGB(15,17,26),
@@ -6279,7 +6297,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					New("UIAspectRatioConstraint", { AspectRatio = 1.1 }, colorpickerFrame)
 
 					local RGB = New("ImageButton", {
-						Name = "RGB",
+						Name = "\0",
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
 						Position = UDim2.new(0.067, 0, 0.068, 0),
@@ -6290,7 +6308,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					}, colorpickerFrame)
 
 					local RGBCircle = New("ImageLabel", {
-						Name = "RGBCircle",
+						Name = "\0",
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
 						Size = UDim2.new(0, 14, 0, 14),
@@ -6301,7 +6319,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					}, RGB)
 
 					local Darkness = New("ImageButton", {
-						Name = "Darkness",
+						Name = "\0",
 						BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 						BorderSizePixel = 0,
 						Position = UDim2.new(0.831940293, 0, 0.068, 0),
@@ -6312,7 +6330,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					}, colorpickerFrame)
 
 					local DarknessCircle = New("Frame", {
-						Name = "DarknessCircle",
+						Name = "\0",
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 						BorderSizePixel = 0,
@@ -6357,7 +6375,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 						colorpickerButton.BackgroundColor3 = c
 						Darkness.BackgroundColor3 = c
 						DarknessCircle.BackgroundColor3 = c
-						if callback then callback(c) end
+						if callback then SafeCall(callback, c) end
 					end
 
 					local function mouseLocation()
@@ -6376,7 +6394,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 						local realcolor = Color3.fromHSV(color[1], color[2], color[3])
 						DarknessCircle.BackgroundColor3 = realcolor
 						DarknessCircle.Position = UDim2.new(0.5, 0, y, -cy)
-						if callback then callback(realcolor) end
+						if callback then SafeCall(callback, realcolor) end
 						update()
 					end
 
@@ -6399,7 +6417,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 						local realcolor = Color3.fromHSV(color[1], color[2], color[3])
 						Darkness.BackgroundColor3 = realcolor
 						DarknessCircle.BackgroundColor3 = realcolor
-						if callback then callback(realcolor) end
+						if callback then SafeCall(callback, realcolor) end
 						update()
 					end
 
@@ -6467,7 +6485,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 					function obj:Set(c)
 						local h2, s2, v2 = Color3.toHSV(c)
 						setcolor({h2, s2, v2})
-						if callback then callback(c) end
+						if callback then SafeCall(callback, c) end
 					end
 					function obj:Get()
 						return Color3.fromHSV(color[1], color[2], color[3])
@@ -6493,7 +6511,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 
 			tabOrder = tabOrder + 0.5
 			subTabContainer = New("Frame", {
-				Name = "SubTabContainer",
+				Name = "\0",
 				Size = UDim2.new(1, 0, 0, 20),
 				BackgroundTransparency = 1,
             AutomaticSize = Enum.AutomaticSize.Y,
@@ -6602,7 +6620,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 			local iconRef = nil
 			if icon and icon ~= "" then
 				iconRef = New("ImageLabel", {
-					Name = "STIcon",
+					Name = "\0",
 					Position = UDim2.new(0.1, 0, 0.5, 0),
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Size = UDim2.new(0.20000000298023224, 0, 0.6500000011920929, 0),
@@ -6615,7 +6633,7 @@ UIAspectRatioConstraint.Parent = Colorpicker
 			end
 
 			local STLabel = New("TextLabel", {
-				Name = "STLabel",
+				Name = "\0",
 				Position = UDim2.new(0.23000000417232513, 0, 0.235, 0),
 				Size = UDim2.new(0.7070000171661377, 0, 0.510000011920929, 0),
 				BackgroundTransparency = 1,
